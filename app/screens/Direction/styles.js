@@ -1,0 +1,22 @@
+import { StyleSheet, Dimensions } from 'react-native';
+import { colors } from '../../config/styles';
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
+
+export default StyleSheet.create({
+    searchButton:{
+        alignSelf:'center',
+        marginTop: 20,
+        borderColor: colors.light
+    },
+    itemSearch:{
+        borderBottomColor: colors.light
+    },
+    guide:{
+        padding: 15,
+        marginTop: 15
+    },
+    textGuide:{
+        color: '#C0C0C0'
+    }
+})
