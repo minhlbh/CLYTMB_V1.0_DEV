@@ -13,8 +13,8 @@ import {
     ScrollableTab,
     Text
 } from "native-base";
-import TabBookmark from './TabBookmark'
-
+import TabBookmark from './TabBookmark';
+import styles from './styles';
 class Bookmark extends Component {
     constructor(props) {
         super(props);
@@ -25,23 +25,23 @@ class Bookmark extends Component {
     render() {
         return (
             <Container>
-                <Header hasTabs>
+                <Header hasTabs style={styles.header}>
                     <Left />
                     <Body>
-                        <Title>Lưu trữ</Title>
+                        <Title style={styles.textHeader}>Lưu trữ</Title>
                     </Body>
                     <Right>
                         {!this.state.isDelete ? 
                         <Button transparent 
                             onPress={() => this.setState({ isDelete: true })}
                         >
-                            <Icon active name='md-trash' />
+                            <Icon style={styles.textHeader} active name='md-trash' />
                         </Button>
                         :
                          <Button transparent 
                             onPress={() => this.setState({ isDelete: false })}
                         >
-                           <Icon active name='md-close' />
+                           <Icon style={styles.textHeader} active name='md-close' />
                         </Button>
                         }
                     </Right>

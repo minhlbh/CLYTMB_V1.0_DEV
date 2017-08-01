@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Image } from 'react-native';
 import {
     Container, Header, Left, Body, Right, Content,
-    Text,Title,
+    Text, Title,
     Card, CardItem,
     Thumbnail,
     Icon,
@@ -13,17 +13,46 @@ import {
     Col,
     Row
 } from 'native-base';
+import styles from './styles';
 
 class News extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSearch: false,
+        };
+    }
     render() {
         return (
             <Container>
-                <Header>
-                    <Body>
-                        <Title>Tin tức</Title>
-                    </Body>
-                </Header>
-                <Content>
+                {!this.state.isSearch ? (
+                    <Header style={styles.header}>
+                        <Left />
+                        <Body>
+                            <Title style={styles.textHeader}>Tin tức</Title>
+                        </Body>
+                        <Right >
+                        <Button transparent dark 
+                            onPress ={() => this.setState({isSearch: true})}
+                        >
+                            <Icon style={styles.textHeader} name='md-search' />
+                        </Button>
+                    </Right>
+                    </Header>
+                ) : (
+                    <Header style={styles.header} searchBar rounded>
+                        <Item style={{ backgroundColor: '#FFF' }}>
+                            <Icon name="ios-search" />
+                            <Input placeholder="Search" />
+                        </Item>
+                        <Button transparent
+                            onPress={() => this.setState({ isSearch: false })}
+                        >
+                            <Text style={styles.textHeader}>Cancel</Text>
+                        </Button>
+                    </Header>
+                )}
+                < Content >
                     <Grid>
                         <Row>
                             <Col>

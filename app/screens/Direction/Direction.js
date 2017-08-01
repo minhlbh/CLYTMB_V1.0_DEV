@@ -27,15 +27,15 @@ class Direction extends Component {
         return (
             <Container>
 
-                <Header searchBar rounded>
-                    <Item>
+                <Header searchBar rounded style={styles.header}>
+                    <Item style={{backgroundColor: '#FFF'}}>
                         <Icon name="ios-search" />
                         <Input placeholder="Search" />
                     </Item>
                     <Button transparent
                         onPress={() => this.setState({ isSearch: true })}
                     >
-                        <Text>Search</Text>
+                        <Text style={styles.textHeader}>Search</Text>
                     </Button>
                 </Header>
 

@@ -6,7 +6,7 @@ import {
     List, ListItem,
     Icon
 } from 'native-base';
-
+import styles from './styles';
 class Setting extends Component {
 
     render() {
@@ -36,9 +36,9 @@ class Setting extends Component {
 
         return (
             <Container style={{ backgroundColor: '#FFF' }}>
-                <Header>
+                <Header style={styles.header}>
                     <Body>
-                        <Title>Setting</Title>
+                        <Title style={styles.textHeader}>Setting</Title>
                     </Body>
                 </Header>
 

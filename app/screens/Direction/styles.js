@@ -18,5 +18,11 @@ export default StyleSheet.create({
     },
     textGuide:{
         color: '#C0C0C0'
-    }
+    },
+    header:{
+        backgroundColor: colors.light
+    },
+    textHeader :{
+        color : colors.header.text,
+    },
 })
