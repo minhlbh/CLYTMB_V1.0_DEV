@@ -4,5 +4,6 @@ export const colors = {
     light: '#10a5bd',
     header: {
         text: '#FFF',
+        background: '#0f9cb3'
     }
 };

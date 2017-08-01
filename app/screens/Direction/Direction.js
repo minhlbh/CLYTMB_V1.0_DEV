@@ -41,13 +41,22 @@ class Direction extends Component {
 
                 {this.state.isSearch ? (
                     <Tabs>
-                        <Tab heading="Bác sĩ">
+                        <Tab heading="Bác sĩ" 
+                            activeTextStyle={styles.activeTextTab}
+                            activeTabStyle={styles.activeTab}
+                        >
                             <TabDirection tabNum='1' />
                         </Tab>
-                        <Tab heading="Bệnh viện">
+                        <Tab heading="Bệnh viện" 
+                            activeTextStyle={styles.activeTextTab}
+                            activeTabStyle={styles.activeTab}
+                        >
                             <TabDirection tabNum='2' />
                         </Tab>
-                        <Tab heading="Phòng khám" >
+                        <Tab heading="Phòng khám" 
+                            activeTextStyle={styles.activeTextTab}
+                            activeTabStyle={styles.activeTab}
+                        >
                             <TabDirection tabNum='3' />
                         </Tab>
                     </Tabs>

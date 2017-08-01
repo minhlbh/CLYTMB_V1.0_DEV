@@ -5,7 +5,7 @@ const deviceWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
     header:{
-        backgroundColor: colors.light
+        backgroundColor: colors.header.background
     },
     textHeader :{
         color : colors.header.text,

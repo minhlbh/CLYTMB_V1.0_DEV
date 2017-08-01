@@ -11,7 +11,7 @@ export default StyleSheet.create({
         backgroundColor: colors.background
     },
     header:{
-        backgroundColor: colors.light
+        backgroundColor: colors.header.background
     },
     textHeader :{
         color : colors.header.text,

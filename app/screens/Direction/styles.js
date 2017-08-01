@@ -20,9 +20,16 @@ export default StyleSheet.create({
         color: '#C0C0C0'
     },
     header:{
-        backgroundColor: colors.light
+        backgroundColor: colors.header.background
     },
     textHeader :{
         color : colors.header.text,
     },
+    activeTextTab:{
+        color: colors.light,
+    },
+    activeTab:{
+        borderBottomColor: colors.light,
+        
+    }
 })
