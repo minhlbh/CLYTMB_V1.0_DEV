@@ -58,34 +58,14 @@ class Direction extends Component {
                                     <Icon name="md-alarm" />
                                     <Text>  Lịch sử tìm kiếm</Text>
                                 </ListItem>
-                                <ListItem avatar>
-                                    <Left>
-                                        <Thumbnail source={require('../../images/phucdo.jpg')} />
-                                    </Left>
-                                    <Body>
-                                        <Text>Bác sĩ : Đỗ Thành Phúc</Text>
-                                        <Text note>Số 3 ngách 55/51 Hoàng Hoa Thám</Text>
-                                    </Body>
-                                    <Right>
-                                    </Right>
-                                </ListItem>
-                                <ListItem avatar>
-                                    <Left>
-                                        <Thumbnail source={require('../../images/phucdo.jpg')} />
-                                    </Left>
-                                    <Body>
-                                        <Text>Bác sĩ : Phúc Đỗ</Text>
-                                        <Text note>Giám đóc bệnh viện chợ rẫy</Text>
-                                    </Body>
-                                    <Right>
-                                    </Right>
+                                <ListItem >
+                                    <Text> Đỗ Thành Phúc</Text>
                                 </ListItem>
                                 <ListItem>
-                                    <Thumbnail square size={80} source={require('../../images/Vinmec.png')} />
-                                    <Body>
-                                        <Text>Bệnh viện Vinmec Hà Nội</Text>
-                                        <Text note>Bệnh Viện hàng đầu Việt Nam</Text>
-                                    </Body>
+                                    <Text>Giám đóc bệnh viện chợ rẫy</Text>
+                                </ListItem>
+                                <ListItem>
+                                    <Text>Bệnh viện Vinmec Hà Nội</Text>
                                 </ListItem>
                             </List>
                         </Content>

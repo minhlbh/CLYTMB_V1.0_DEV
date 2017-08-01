@@ -23,7 +23,7 @@ class TabDirection extends Component {
                                 <Thumbnail source={require('../../images/phucdo.jpg')} />
                             </Left>
                             <Body>
-                                <Text>Bác sĩ : Do phuc</Text>
+                                <Text>Bác sĩ : Đỗ Thành Phúc </Text>
                                 <Text note>Số 3 ngách 55/51 Hoàng Hoa Thám</Text>
                             </Body>
                             <Right>
