@@ -28,7 +28,7 @@ class Direction extends Component {
             <Container>
 
                 <Header searchBar rounded style={styles.header}>
-                    <Item style={{backgroundColor: '#FFF'}}>
+                    <Item >
                         <Icon name="ios-search" />
                         <Input placeholder="Search" />
                     </Item>
@@ -40,22 +40,19 @@ class Direction extends Component {
                 </Header>
 
                 {this.state.isSearch ? (
-                    <Tabs>
+                    <Tabs tabBarUnderlineStyle= {styles.underlineTab}>
                         <Tab heading="Bác sĩ" 
                             activeTextStyle={styles.activeTextTab}
-                            activeTabStyle={styles.activeTab}
                         >
                             <TabDirection tabNum='1' />
                         </Tab>
                         <Tab heading="Bệnh viện" 
-                            activeTextStyle={styles.activeTextTab}
-                            activeTabStyle={styles.activeTab}
-                        >
+                            activeTextStyle={styles.activeTextTab} 
+                        >                                             
                             <TabDirection tabNum='2' />
                         </Tab>
                         <Tab heading="Phòng khám" 
                             activeTextStyle={styles.activeTextTab}
-                            activeTabStyle={styles.activeTab}
                         >
                             <TabDirection tabNum='3' />
                         </Tab>

@@ -54,9 +54,10 @@ const Tabs = TabNavigator({
       showIcon: true,
       style: {
         backgroundColor: '#FFF',
+        height: 50
       },
       labelStyle: {
-        fontSize: 10,
+        fontSize: 11,
       },
       indicatorStyle:{
         backgroundColor: '#0f9cb3',

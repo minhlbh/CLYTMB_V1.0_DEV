@@ -28,8 +28,7 @@ export default StyleSheet.create({
     activeTextTab:{
         color: colors.light,
     },
-    activeTab:{
-        borderBottomColor: colors.light,
-        
+    underlineTab:{
+        backgroundColor: colors.light,
     }
 })

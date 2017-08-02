@@ -9,12 +9,43 @@ import {
     Input,
     Item
 } from 'native-base';
-import { Image } from 'react-native';
+import { Image,AsyncStorage } from 'react-native';
 import styles from "./styles";
 import images from '../../config/images';
 import { colors } from '../../config/styles';
+import accountApi from '../../api/accountApi';
+import Error from '../../components/error';
+import Loading from '../../components/loading';
 
 class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            phone: "",
+            pass: "",
+            error: "",
+            loading: false
+        };
+    }
+
+    login = () => {
+        this.setState({ loading: true });
+        var ph = this.state.phone;
+        var pw = this.state.pass;
+        accountApi.getToken(ph, pw).then(res => {
+            console.log(res.access_token);
+            this.setState({ loading: false });
+            if (res.access_token) {
+                this.props.navigation.navigate("Tabs");
+                AsyncStorage.setItem('access_token', res.access_token);
+            } else {
+                this.setState({ error: "Sai tên số điện thoại hoặc mật khẩu" });
+            }
+            
+        });
+
+    }
+
     render() {
         return (
             <Container style={styles.container}>
@@ -42,14 +73,16 @@ class Login extends Component {
                                 <Item style={styles.item}>
                                     <Input
                                         style={styles.input}
-                                        placeholder="Mật khẩu"
+                                        placeholder="Số điện thoại"
+                                        onChangeText={(phone)=> this.setState({ phone})}
                                     />
                                 </Item>
                                 <Item style={styles.item}>
                                     <Input
                                         style={styles.input}
-                                        placeholder="Số điện thoại"
+                                        placeholder="Mật khẩu"
                                         secureTextEntry={true}
+                                        onChangeText={(pass)=> this.setState({ pass})}
                                     />
                                 </Item>
                             </Col>
@@ -60,7 +93,7 @@ class Login extends Component {
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                             <Button success
                                 style={styles.btnLogin}
-                                onPress={() => this.props.navigation.navigate('Tabs')}
+                                onPress={() => this.login()}
                             >
                                 <Text style={{ width: 133, textAlign: 'center' }}>Đăng nhập</Text>
                             </Button>
@@ -78,6 +111,14 @@ class Login extends Component {
                         >
                             <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
                         </Button>
+                        {this.state.loading ?
+                            <Loading /> : <View/>
+                        } 
+
+                         {this.state.error ?
+                            <Error error={this.state.error}/> : <View />
+                        } 
+                       
                     </View>
                 </Content>
             </Container>

@@ -31,36 +31,47 @@ class Bookmark extends Component {
                         <Title style={styles.textHeader}>Lưu trữ</Title>
                     </Body>
                     <Right>
-                        {!this.state.isDelete ? 
-                        <Button transparent 
-                            onPress={() => this.setState({ isDelete: true })}
-                        >
-                            <Icon style={styles.textHeader} active name='md-trash' />
-                        </Button>
-                        :
-                         <Button transparent 
-                            onPress={() => this.setState({ isDelete: false })}
-                        >
-                           <Icon style={styles.textHeader} active name='md-close' />
-                        </Button>
+                        {!this.state.isDelete ?
+                            <Button transparent
+                                onPress={() => this.setState({ isDelete: true })}
+                            >
+                                <Icon style={styles.textHeader} active name='md-trash' />
+                            </Button>
+                            :
+                            <Button transparent
+                                onPress={() => this.setState({ isDelete: false })}
+                            >
+                                <Icon style={styles.textHeader} active name='md-close' />
+                            </Button>
                         }
                     </Right>
                 </Header>
-                <Tabs renderTabBar={() => <ScrollableTab />}>
-                    <Tab heading="Tất cả">
+                <Tabs tabBarUnderlineStyle={styles.underlineTab}
+                    renderTabBar={() => <ScrollableTab />}>
+                    <Tab heading="Tất cả"
+                        activeTextStyle={styles.activeTextTab}
+                    >
                         <TabBookmark tabNum='1' isDelete={this.state.isDelete} />
                     </Tab>
-                    <Tab heading="Bệnh">
-                        <TabBookmark tabNum='2' isDelete={this.state.isDelete}/>
+                    <Tab heading="Bệnh"
+                        activeTextStyle={styles.activeTextTab}
+                    >
+                        <TabBookmark tabNum='2' isDelete={this.state.isDelete} />
                     </Tab>
-                    <Tab heading="Thuốc">
-                        <TabBookmark tabNum='3' isDelete={this.state.isDelete}/>
+                    <Tab heading="Thuốc"
+                        activeTextStyle={styles.activeTextTab}
+                    >
+                        <TabBookmark tabNum='3' isDelete={this.state.isDelete} />
                     </Tab>
-                    <Tab heading="Chỉ dẫn">
-                        <TabBookmark tabNum='4' isDelete={this.state.isDelete}/>
+                    <Tab heading="Chỉ dẫn"
+                        activeTextStyle={styles.activeTextTab}
+                    >
+                        <TabBookmark tabNum='4' isDelete={this.state.isDelete} />
                     </Tab>
-                    <Tab heading="Tin tức">
-                        <TabBookmark tabNum='5' isDelete={this.state.isDelete}/>
+                    <Tab heading="Tin tức"
+                        activeTextStyle={styles.activeTextTab}
+                    >
+                        <TabBookmark tabNum='5' isDelete={this.state.isDelete} />
                     </Tab>
                 </Tabs>
             </Container>

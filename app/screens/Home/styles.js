@@ -4,29 +4,32 @@ const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
-    container:{
+    container: {
         backgroundColor: colors.background,
     },
-    content:{
+    content: {
         backgroundColor: colors.background
     },
-    header:{
+    header: {
         backgroundColor: colors.header.background
     },
-    textHeader :{
-        color : colors.header.text,
+    textHeader: {
+        color: colors.header.text,
     },
-    logo:{
+    logo: {
         height: 39,
         width: 39,
         marginTop: 5
     },
-    titleHeader:{
-        color : colors.header.text,
+    titleHeader: {
+        color: colors.header.text,
         marginTop: 16,
         fontWeight: 'bold'
     },
-    textDivider:{
+    textDivider: {
         color: '#999'
-    }
+    },
+    textChildMenu: {
+        color: colors.light
+    },
 })

@@ -41,7 +41,7 @@ class News extends Component {
                     </Header>
                 ) : (
                     <Header style={styles.header} searchBar rounded>
-                        <Item style={{ backgroundColor: '#FFF' }}>
+                        <Item>
                             <Icon name="ios-search" />
                             <Input placeholder="Search" />
                         </Item>

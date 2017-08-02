@@ -10,4 +10,10 @@ export default StyleSheet.create({
     textHeader :{
         color : colors.header.text,
     },
+    activeTextTab:{
+        color: colors.light,
+    },
+    underlineTab:{
+        backgroundColor: colors.light,
+    }
 })
