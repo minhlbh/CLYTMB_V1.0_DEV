@@ -15,18 +15,19 @@ export default StyleSheet.create({
     },
     logoContainer: {
         flex: 1,
-        alignItems: 'center',
-        marginTop: deviceHeight / 20,
+        //alignItems: 'center',
+        marginTop: deviceHeight / 35,
     },
     logoImage: {
         width: 150,
         height: 150,
+        alignSelf: 'center'
     },
     logoText: {
         marginTop: 10,
         fontSize: 30,
-        color: colors.light
-
+        color: colors.light,
+        alignSelf: 'center'
     },
     bg: {
         flex: 1,
@@ -67,5 +68,9 @@ export default StyleSheet.create({
     },
     icon: {
         color: colors.dark,
+    }, 
+    close:{
+        color: colors.light,
+        fontSize: 30
     }
 });

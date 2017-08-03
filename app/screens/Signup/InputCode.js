@@ -57,7 +57,7 @@ class InputCode extends Component {
                         <Text
                             style={{ textAlign: 'center', color: '#666', fontSize: 16, margin: 35 }}>
                             Một tin nhắn chứa mã xác thực đã gửi đến só điện thoại của bạn.
-            </Text>
+                         </Text>
                         <Form style={styles.form}>
 
                             <Item regular>

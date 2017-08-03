@@ -9,7 +9,7 @@ import {
     Input,
     Item
 } from 'native-base';
-import { Image,AsyncStorage } from 'react-native';
+import { Image, AsyncStorage } from 'react-native';
 import styles from "./styles";
 import images from '../../config/images';
 import { colors } from '../../config/styles';
@@ -18,7 +18,7 @@ import Error from '../../components/error';
 import Loading from '../../components/loading';
 
 class Login extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             phone: "",
@@ -41,7 +41,7 @@ class Login extends Component {
             } else {
                 this.setState({ error: "Sai tên số điện thoại hoặc mật khẩu" });
             }
-            
+
         });
 
     }
@@ -50,7 +50,13 @@ class Login extends Component {
         return (
             <Container style={styles.container}>
                 <Content scrollEnabled={false}>
+
                     <View style={styles.logoContainer}>
+                        <Button transparent 
+                            onPress={()=> this.props.navigation.navigate('Tabs')}
+                        >
+                            <Icon style={styles.close} name='md-close' />
+                        </Button>
                         <Image source={images.logo} style={styles.logoImage} />
                         <Text style={styles.logoText}> Trưởng Khoa </Text>
                     </View>
@@ -74,7 +80,7 @@ class Login extends Component {
                                     <Input
                                         style={styles.input}
                                         placeholder="Số điện thoại"
-                                        onChangeText={(phone)=> this.setState({ phone})}
+                                        onChangeText={(phone) => this.setState({ phone })}
                                     />
                                 </Item>
                                 <Item style={styles.item}>
@@ -82,7 +88,7 @@ class Login extends Component {
                                         style={styles.input}
                                         placeholder="Mật khẩu"
                                         secureTextEntry={true}
-                                        onChangeText={(pass)=> this.setState({ pass})}
+                                        onChangeText={(pass) => this.setState({ pass })}
                                     />
                                 </Item>
                             </Col>
@@ -107,18 +113,18 @@ class Login extends Component {
 
                         <Button transparent
                             style={styles.btnTransparent}
-                        // onPress={() => this.props.navigation.navigate("InputPhone")}
+                            onPress={() => this.props.navigation.navigate("ForgetPass")}
                         >
                             <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
                         </Button>
                         {this.state.loading ?
-                            <Loading /> : <View/>
-                        } 
+                            <Loading /> : <View />
+                        }
 
-                         {this.state.error ?
-                            <Error error={this.state.error}/> : <View />
-                        } 
-                       
+                        {this.state.error ?
+                            <Error error={this.state.error} /> : <View />
+                        }
+
                     </View>
                 </Content>
             </Container>

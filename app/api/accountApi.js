@@ -54,6 +54,38 @@ var accountApi = {
         })
             .then((response) => response.json())
     },
-}
+    forgotPassword(phone) {
+        let details = {
+            phone: phone,
+        };
+
+        var url = apiUrl.forgotPassword;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postFormBody(details),
+        })
+            .then((response) => response.json())
+    },
+    forgotPassConfirm(idU, phone, pass, code) {
+        let details = {
+            Code: code,
+            PhoneNumber: phone,
+            Password: pass,
+        };
+        var url = `${apiUrl.forgotPassword}?IdU=${idU}`;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postFormBody(details),
+        })
+            .then((response) => response.json())
+    }
+};
+
 
 export default accountApi;
