@@ -13,10 +13,37 @@ import {
     View,
     H3
 } from 'native-base';
-import { FlatList, Image ,WebView} from 'react-native';
+import { FlatList, Image ,WebView,Linking} from 'react-native';
 import medicalApi from '../../../../api/medicalApi';
 import styles from './styles';
 import HTMLView from 'react-native-htmlview';
+
+class OpenURLButton extends React.Component {
+  static propTypes = {
+    url: React.PropTypes.string,
+  };
+
+  handleClick = () => {
+    Linking.canOpenURL(this.props.url).then(supported => {
+      if (supported) {
+        Linking.openURL(this.props.url);
+      } else {
+        console.log('Don\'t know how to open URI: ' + this.props.url);
+      }
+    });
+  };
+
+  render() {
+    return (
+        <Button transparent light
+            onPress={this.handleClick}>
+        >
+            <Text style={styles.text}>Open {this.props.url}</Text>
+          </Button>
+    );
+  }
+}
+
 
 class InfoBenh extends Component {
     constructor(props) {

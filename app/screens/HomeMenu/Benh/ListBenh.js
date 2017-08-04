@@ -18,7 +18,7 @@ class ListBenh extends Component {
         super(props);
         this.state = {
             DsBenh: [],
-            isSearch: false,
+            isSearch: true,
             page: 1,
         }
     }
@@ -27,13 +27,11 @@ class ListBenh extends Component {
         medicalApi.getDsBenh(1).then(res => {
             this.setState({
                 DsBenh: res.DsBenh,
-                isSearch: false,
                 page: 1,
             })
         });
     }
     _onEndReached = () => {
-        if (!this.state.isSearch) {
             this.setState({ page: this.state.page + 1 })
             var page = this.state.page + 1;
             medicalApi.getDsBenh(page).then(res => {
@@ -44,17 +42,17 @@ class ListBenh extends Component {
                     })
                 }
             });
-        }
+        
     }
 
     search(key) {
-            medicalApi.getSearchResult(key).then(res => {
-                if (!res || res.length != 0) {
-                    this.setState({
-                        DsBenh: res.DsBenh,
-                    })
-                }
-            })
+        medicalApi.getSearchResult(key).then(res => {
+            if (!res || res.length != 0) {
+                this.setState({
+                    DsBenh: res.DsBenh,
+                })
+            }
+        })
     }
 
 
@@ -108,9 +106,9 @@ class ListBenh extends Component {
                         <FlatList
                             data={this.state.DsBenh}
                             renderItem={({ item }) =>
-                            <ListItem onPress={() => 
-                                this.props.navigation.navigate('DetailBenh',{id: item.Id, name: item.Name} 
-                            )}>
+                                <ListItem onPress={() =>
+                                    this.props.navigation.navigate('DetailBenh', { id: item.Id, name: item.Name }
+                                    )}>
                                     <Body >
                                         <Text>{item.Name}</Text>
                                     </Body>
