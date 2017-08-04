@@ -97,13 +97,7 @@ class Home extends Component {
             <Container style={styles.container}>
                 {!this.state.isSearch ? (
                     <Header style={styles.header}>
-                        <Left >
-                            <Row style={{ width: 400 }}>
-                                <Image style={styles.logo} source={images.logo} />
-                                <Text style={styles.titleHeader}> Cloud y tế Trưởng Khoa</Text>
-                            </Row>
-                        </Left>
-
+                        <Text style={styles.titleHeader}> Cloud y tế Trưởng Khoa</Text>
                         <Right >
                             <Button transparent dark
                                 onPress={() => this.setState({ isSearch: true })}
@@ -124,7 +118,7 @@ class Home extends Component {
                                 />
                             </Item>
                             <Button transparent
-                                onPress={() => this.setState({ isSearch: false ,menu: this.state.menuSave})}
+                                onPress={() => this.setState({ isSearch: false, menu: this.state.menuSave })}
                             >
                                 <Text style={styles.textHeader}>Cancel</Text>
                             </Button>
@@ -132,37 +126,37 @@ class Home extends Component {
                     )}
 
                 <Content style={styles.content}>
-                    {this.state.loading &&
-                        <Loading /> 
+                    {this.state.loading  &&
+                            <Loading />
                     }
+                    
                     {this.state.menu.map((listMenu) => (
-                        <List>
-                            <ListItem itemDivider>
-                                <Left><Text style={styles.textDivider}>{listMenu.Ten}</Text></Left>
+                        <Card>
+                            <CardItem >
+                                <Text style={styles.textDividerTitle}>{listMenu.Ten}</Text>
+                                <Right>
                                 <Text note style={styles.textDivider}>{listMenu.items.length} apps</Text>
-                            </ListItem>
-                            <Card>
-                                <FlatList
-                                    data={listMenu.items}
-                                    renderItem={({ item }) =>
+                                </Right>
+                            </CardItem>
+                            <FlatList
+                                data={listMenu.items}
+                                renderItem={({ item }) =>
                                     <TouchableOpacity
-                                        onPress={()=> this.props.navigation.navigate(item.url)}
+                                        onPress={() => this.props.navigation.navigate(item.url)}
                                     >
                                         <CardItem>
-                                            <Image style={{ marginRight: 15, width: 65, height: 65 }} source={{ uri: item.Images[0] }} />
-                                            <Body >
+                                            <Image style={styles.itemImage} source={{ uri: item.Images[0] }} />
+                                            <Body>
                                                 <Text style={styles.textChildMenu}>
-
                                                     {this.toEtc(item.Ten, 29)}
                                                 </Text>
-                                                <Text note>{this.toEtc(this.replaceHtml(item.tomtat), 65)}</Text>
+                                                <Text note>{this.toEtc(this.replaceHtml(item.tomtat), 95)}</Text>
                                             </Body>
                                         </CardItem>
                                     </TouchableOpacity>
-                                    }
-                                />
-                            </Card>
-                        </List>
+                                }
+                            />
+                        </Card>
                     ))}
                 </Content>
             </Container>

@@ -9,11 +9,13 @@ import {
     Button,
     Icon,
     Card,
-    CardItem
+    CardItem,
+    View,
+    H3
 } from 'native-base';
-import { FlatList, } from 'react-native';
+import { FlatList, Image ,WebView} from 'react-native';
 import medicalApi from '../../../../api/medicalApi';
-//import styles from './styles';
+import styles from './styles';
 import HTMLView from 'react-native-htmlview';
 
 class InfoBenh extends Component {
@@ -21,29 +23,64 @@ class InfoBenh extends Component {
         super(props);
         this.state = {
             detail: [],
-        }
-    }
-
-    componentWillMount() {
+        };
         medicalApi.getDetailBenh(this.props.id).then(res => {
             this.setState({
                 detail: res,
             })
         });
     }
+    rederDuLieu(LoaiDuLieu, Dulieu, LinkAnh) {
+        switch (LoaiDuLieu) {
+            case 1: return (
+                <HTMLView
+                    value={Dulieu}
+                />
+            )
+                break;
+            case 2: return (
+                <Image
+                    style={styles.image}
+                    source={{ uri: LinkAnh + Dulieu }}
+                />
+            )
+                break;
+            case 5: return (<WebView
+                    source={{ html: '<iframe width="345" height="230"src="'
+                                    + Dulieu.replace('https://youtu.be','https://www.youtube.com/embed') 
+                                    +'"></iframe>' }}
+                    style={styles.video}
+                    />
+            )
+                break;
+            default:
+                return <View />;
+                break;
+        };
+    }
+
 
     render() {
-
+        const detail = this.state.detail;
         return (
             <Container>
-                <Content>
-                    <Card style={{ paddingTop: 20 }}>
-                        <CardItem>
-                            <HTMLView
-                                value={this.state.detail.TomTat}
-                            />
-                        </CardItem>
-                    </Card>
+                <Content style={styles.content}>
+                        <HTMLView
+                            value={detail.TomTat}
+                        />
+                        {!detail.DsPhanTu ? <View /> :
+                            detail.DsPhanTu.map((listContent) => (
+                                <View style={styles.phantuContainer}>
+                                    <H3 style={{ marginBottom: 5 }}>{listContent.Ten}</H3>
+                                    {listContent.NoiDung.DsDuLieuNoiDung.map((DuLieuNoiDung) => (
+                                        <View>
+                                            {this.rederDuLieu(DuLieuNoiDung.LoaiDuLieu, DuLieuNoiDung.Dulieu, detail.LinkAnh)}
+                                            <Text>{DuLieuNoiDung.TieuDe}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            ))}
+                    
                 </Content>
             </Container>
         )
