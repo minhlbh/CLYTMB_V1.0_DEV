@@ -5,5 +5,6 @@ export const colors = {
     header: {
         text: '#0f9cb3',
         background: '#FFF'
-    }
+    },
+    gray: '#999'
 };

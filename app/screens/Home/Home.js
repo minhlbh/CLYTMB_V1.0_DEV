@@ -55,7 +55,6 @@ class Home extends Component {
 
     search(key) {
         key = key.toLowerCase();
-
         if (!key || key === null) {
             this.setState({ menu: this.state.menuSave })
         } else {
@@ -121,12 +120,11 @@ class Home extends Component {
                                     onChangeText={(key) => {
                                         this.search(key)
                                     }}
-                                    onSubmitEditing={(key) => this.search(key)}
                                     autoFocus={this.state.isSearch}
                                 />
                             </Item>
                             <Button transparent
-                                onPress={() => this.setState({ isSearch: false })}
+                                onPress={() => this.setState({ isSearch: false ,menu: this.state.menuSave})}
                             >
                                 <Text style={styles.textHeader}>Cancel</Text>
                             </Button>
@@ -147,6 +145,9 @@ class Home extends Component {
                                 <FlatList
                                     data={listMenu.items}
                                     renderItem={({ item }) =>
+                                    <TouchableOpacity
+                                        onPress={()=> this.props.navigation.navigate(item.url)}
+                                    >
                                         <CardItem>
                                             <Image style={{ marginRight: 15, width: 65, height: 65 }} source={{ uri: item.Images[0] }} />
                                             <Body >
@@ -157,6 +158,7 @@ class Home extends Component {
                                                 <Text note>{this.toEtc(this.replaceHtml(item.tomtat), 65)}</Text>
                                             </Body>
                                         </CardItem>
+                                    </TouchableOpacity>
                                     }
                                 />
                             </Card>

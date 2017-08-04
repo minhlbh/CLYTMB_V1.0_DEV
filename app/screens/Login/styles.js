@@ -15,7 +15,6 @@ export default StyleSheet.create({
     },
     logoContainer: {
         flex: 1,
-        //alignItems: 'center',
         marginTop: deviceHeight / 35,
     },
     logoImage: {
@@ -44,13 +43,11 @@ export default StyleSheet.create({
         paddingTop: 20
     },
     btnLogin: {
-
         marginTop: 30,
         alignSelf: 'center',
         backgroundColor: colors.dark
     },
     btnRegister: {
-
         marginTop: 30,
         alignSelf: 'center',
         borderColor: colors.dark

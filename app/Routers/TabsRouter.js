@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {  TabNavigator } from "react-navigation";
-import Home from '../screens/Home';
+import HomeStack from './HomeStack';
 import {Icon} from 'native-base';
 import Setting from '../screens/Setting';
 import News from '../screens/News';
@@ -9,7 +9,7 @@ import Direction from '../screens/Direction';
 
 const Tabs = TabNavigator({
   Home: {
-    screen: Home,
+    screen: HomeStack,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => <Icon name="md-home"  style={{ color: tintColor }} />
