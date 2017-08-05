@@ -3,7 +3,7 @@ import postFormBody from './postFormBody';
 
 var medicalApi = {
     getDsBenh(page) {
-        var url = `${apiUrl.listBenh}?Trang=${page}`;
+        var url = `${apiUrl.listBenh}?Trang=${page}&soluongmoitrang=50`;
         return fetch(url).then(res => res.json());
     },
     getSearchResult(key) {

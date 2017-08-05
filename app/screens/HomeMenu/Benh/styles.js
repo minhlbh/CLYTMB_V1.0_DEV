@@ -15,5 +15,14 @@ export default StyleSheet.create({
     },
     icon:{
         color: colors.gray,
-    }
+    },
+    iconBack:{
+        color : colors.header.text,
+        fontSize: 30,
+        marginRight: 15,
+    },
+    textDivider:{
+         color: '#999',
+         fontSize: 13
+    },
 })
