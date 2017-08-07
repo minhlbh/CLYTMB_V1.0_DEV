@@ -13,24 +13,32 @@ class Setting extends Component {
         const list = [
             {
                 title: 'Đăng nhập',
-                icon: 'md-log-in'
-
+                icon: 'md-log-in',
+                navigate: 'Login'
             },
             {
                 title: 'Về chúng tôi',
-                icon: 'md-information-circle'
+                icon: 'md-information-circle',
+                navigate: ''
+                
             },
             {
                 title: 'Thông tin cá nhân',
-                icon: 'md-information-circle'
+                icon: 'md-information-circle',
+                navigate: 'UserInfo'
+                
             },
             {
                 title: 'Thông báo',
-                icon: 'md-notifications'
+                icon: 'md-notifications',
+                navigate: ''
+                
             },
             {
                 title: 'Cập nhập',
-                icon: 'md-sync'
+                icon: 'md-sync',
+                navigate: ''
+                
             }
         ];
 
@@ -46,7 +54,7 @@ class Setting extends Component {
                     <List>
                         {list.map((item, i) => (
                             <ListItem icon
-                                onPress={() => this.props.navigation.navigate('Login')}
+                                onPress={() => this.props.navigation.navigate(item.navigate)}
                             >
                                 <Left>
                                     <Icon name={item.icon} />
