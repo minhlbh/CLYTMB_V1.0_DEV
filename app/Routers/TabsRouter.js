@@ -43,7 +43,7 @@ const Tabs = TabNavigator({
     screen: SettingStack,
     navigationOptions: {
       tabBarLabel: 'Cài đặt',
-      tabBarIcon: ({ tintColor }) => <Icon name="md-settings" style={{ color: tintColor }} />
+      tabBarIcon: ({ tintColor }) => <Icon name="md-settings" style={{ color: tintColor}} />
     },
   },
 }, {
@@ -54,14 +54,15 @@ const Tabs = TabNavigator({
       showIcon: true,
       style: {
         backgroundColor: '#FFF',
-        height: 50
+        height: 51,
+        paddingTop:0
       },
       labelStyle: {
-        fontSize: 11,
+        fontSize: 8.5,
       },
       indicatorStyle:{
         backgroundColor: '#0f9cb3',
-      }
+      },
     }
   });
 

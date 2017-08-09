@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TouchableOpacity } from 'react-native';
 import {
-    Container, Header, Left, Body, Right, Content,
+    Container, Header, Left, Body, Right, Content, DeckSwiper,
     Text, Title,
     List, ListItem,
     Icon
@@ -19,26 +19,26 @@ class Setting extends Component {
             {
                 title: 'Về chúng tôi',
                 icon: 'md-information-circle',
-                navigate: ''
-                
+                navigate: 'AboutUs'
+
             },
             {
                 title: 'Thông tin cá nhân',
                 icon: 'md-information-circle',
                 navigate: 'UserInfo'
-                
+
             },
             {
                 title: 'Thông báo',
                 icon: 'md-notifications',
-                navigate: ''
-                
+                navigate: 'Notification'
+
             },
             {
                 title: 'Cập nhập',
                 icon: 'md-sync',
-                navigate: ''
-                
+                navigate: 'Update'
+
             }
         ];
 

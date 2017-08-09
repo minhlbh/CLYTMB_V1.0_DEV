@@ -126,16 +126,16 @@ class Home extends Component {
                     )}
 
                 <Content style={styles.content}>
-                    {this.state.loading  &&
-                            <Loading />
+                    {this.state.loading &&
+                        <Loading />
                     }
-                    
+
                     {this.state.menu.map((listMenu) => (
                         <Card>
                             <CardItem >
                                 <Text style={styles.textDividerTitle}>{listMenu.Ten}</Text>
                                 <Right>
-                                <Text note style={styles.textDivider}>{listMenu.items.length} apps</Text>
+                                    <Text note style={styles.textDivider}>{listMenu.items.length} apps</Text>
                                 </Right>
                             </CardItem>
                             <FlatList

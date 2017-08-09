@@ -9,5 +9,6 @@ export default StyleSheet.create({
     },
     textHeader :{
         color : colors.header.text,
+        marginLeft: 60
     },
 })

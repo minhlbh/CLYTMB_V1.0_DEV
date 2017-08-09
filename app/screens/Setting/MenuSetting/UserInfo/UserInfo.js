@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import {
-    Container, Content, View, List, ListItem, Left, Image, Body, Right, Item, Label, Input, Fab, Button, Icon, Text, Header, Thumbnail
+    Container, Content, View, List, ListItem, Left, Image, Body, Right, Item, Label, Input, Fab, Button, Icon, Text, Header, Thumbnail, Title
 } from 'native-base'
 import { colors } from '../../../../config/styles';
+import styles from './styles';
 export default class UserInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             disabled: true,
-            active: false,
-            editable: false,
             name: 'Lê Đức Tiến',
             phone: '01672034616',
             position: 'Học viên',
@@ -23,93 +22,114 @@ export default class UserInfo extends Component {
     render() {
         return (
             <Container>
-                <Header>
+                <Header style={styles.header}>
                     <Left>
-                        <Button transparent>
-                            <Icon name='arrow-back' />
+                        <Button transparent
+                            onPress={() => { this.props.navigation.navigate('Setting') }}>
+                            <Icon name='arrow-back'
+                                style={{ color: 'black' }} />
                         </Button>
                     </Left>
-                    <Text>Thông tin cá nhân</Text>
-                    <Right />
+                    <Title style={styles.textHeader}>Thông tin cá nhân</Title>
+                    <Right>
+                        {!this.state.disabled ?
+                            <Button transparent
+                                onPress={() => this.setState({ disabled: true })}
+                            >
+                                <Icon style={styles.icon} active name='md-checkmark' />
+                            </Button>
+                            :
+                            <Button transparent
+                                onPress={() => this.setState({ disabled: false })}
+                            >
+                                <Icon style={styles.icon} active name='md-create' />
+                            </Button>
+                        }
+                    </Right>
                 </Header>
                 <Content>
-                    <List>
-                        <ListItem>
-                            <Left>
-                                <Thumbnail source={{ uri: 'http://lophocnauan.vn/profiles/lophocnauanvn/uploads/attach/post/images/1866.jpg' }}
-                                    style={{ width: 100, height: 100 }} />
-                            </Left>
-                            <Body>
-                                <Text>Lê Đức Tiến</Text>
-                                <Text>leductien1997123@gmail.com</Text>
-                            </Body>
-                            <Right />
-                        </ListItem>
-                    </List>
-                    <Text>Thông tin tài khoản</Text>
-                    <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
-                      <Item>
-                        <Label>Họ và tên:</Label>
-                        <Input
-                            disabled
-                            onChangeText={(name) => this.setState({ name })}
-                            value={this.state.name}>
-
-                        </Input>
-                    </Item>
+                    <View style={styles.panel1}>
+                        <List>
+                            <ListItem>
+                                <Left>
+                                    <Thumbnail source={{ uri: 'http://lophocnauan.vn/profiles/lophocnauanvn/uploads/attach/post/images/1866.jpg' }}
+                                        style={{ width: 100, height: 100 }} />
+                                </Left>
+                                <Body>
+                                    <Text style={styles.textinfo}>{this.state.name}</Text>
+                                    <Text style={styles.textinfo}>@rockstar.tie</Text>
+                                </Body>
+                                <Right>
+                                </Right>
+                            </ListItem>
+                        </List>
+                    </View>
+                    <View style={styles.panel2}>
+                        <Text>Thông tin tài khoản</Text>
+                        <Item>
+                            <Label style={styles.label}>Họ và tên:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(name) => this.setState({ name })}
+                                value={this.state.name}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Số điện thoại:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(phone) => this.setState({ phone })}
+                                value={this.state.phone}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Chức danh:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(position) => this.setState({ position })}
+                                value={this.state.position}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Email:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(email) => this.setState({ email })}
+                                value={this.state.email}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Chuyên môn:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(best) => this.setState({ best })}
+                                value={this.state.best}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Đơn vị công tác:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(job) => this.setState({ job })}
+                                value={this.state.job}>
+                            </Input>
+                        </Item>
+                        <Item>
+                            <Label style={styles.label}>Vị trí đăng kí:</Label>
+                            <Input
+                                style={styles.textInput}
+                                disabled={this.state.disabled}
+                                onChangeText={(position2) => this.setState({ position2 })}
+                                value={this.state.position2}>
+                            </Input>
+                        </Item>
+                    </View>
                 </Content>
             </Container >
         )
