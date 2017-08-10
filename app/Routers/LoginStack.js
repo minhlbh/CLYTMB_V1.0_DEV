@@ -36,5 +36,6 @@ export default (LoginStack = StackNavigator({
          navigationOptions: {
             header: null
         }
-    }
+    },
+
 }));

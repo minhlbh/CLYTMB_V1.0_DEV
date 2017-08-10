@@ -53,7 +53,7 @@ class Login extends Component {
 
                     <View style={styles.logoContainer}>
                         <Button transparent 
-                            onPress={()=> this.props.navigation.navigate('Tabs')}
+                            onPress={()=> this.props.navigation.navigate('Setting')}
                         >
                             <Icon style={styles.close} name='md-close' />
                         </Button>

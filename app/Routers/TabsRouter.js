@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {  TabNavigator } from "react-navigation";
 import HomeStack from './HomeStack';
 import {Icon} from 'native-base';
-import Setting from '../screens/Setting';
+import SettingStack from './SettingStack';
 import News from '../screens/News';
 import Bookmark from '../screens/Bookmark';
 import Direction from '../screens/Direction';
@@ -40,10 +40,10 @@ const Tabs = TabNavigator({
     },
   },
   Setting: {
-    screen: Setting,
+    screen: SettingStack,
     navigationOptions: {
       tabBarLabel: 'Cài đặt',
-      tabBarIcon: ({ tintColor }) => <Icon name="md-settings" style={{ color: tintColor }} />
+      tabBarIcon: ({ tintColor }) => <Icon name="md-settings" style={{ color: tintColor}} />
     },
   },
 }, {
@@ -54,14 +54,15 @@ const Tabs = TabNavigator({
       showIcon: true,
       style: {
         backgroundColor: '#FFF',
-        height: 50
+        height: 51,
+        paddingTop:0
       },
       labelStyle: {
-        fontSize: 11,
+        fontSize: 8.5,
       },
       indicatorStyle:{
         backgroundColor: '#0f9cb3',
-      }
+      },
     }
   });
 
