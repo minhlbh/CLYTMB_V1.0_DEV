@@ -16,6 +16,7 @@ import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
 import Error from '../../components/error';
 import Loading from '../../components/loading';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
 
 class Login extends Component {
     constructor(props) {
@@ -27,6 +28,22 @@ class Login extends Component {
             loading: false
         };
     }
+
+    _fbAuth() {
+        LoginManager.logInWithReadPermissions(['public_profile']).then(
+           function(result) {
+              if (result.isCancelled) {
+                 alert('Login cancelled');
+              } else {
+                 alert('Login success with permissions: '
+                 +result.grantedPermissions.toString());
+              }
+           },
+           function(error) {
+              alert('Login fail with error: ' + error);
+           }
+        );
+     }
 
     login = () => {
         this.setState({ loading: true });
@@ -110,7 +127,12 @@ class Login extends Component {
                                 <Text style={{ width: 133, textAlign: 'center', color: colors.light }}>Đăng kí</Text>
                             </Button>
                         </View>
-
+                        <Button transparent
+                        style={styles.btnTransparent}
+                        onPress={() => this._fbAuth()}
+                    >
+                        <Text style={{ color: colors.light }}>Facebook</Text>
+                    </Button>
                         <Button transparent
                             style={styles.btnTransparent}
                             onPress={() => this.props.navigation.navigate("ForgetPass")}
