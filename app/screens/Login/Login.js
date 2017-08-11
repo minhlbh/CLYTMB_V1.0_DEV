@@ -16,7 +16,7 @@ import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
 import Error from '../../components/error';
 import Loading from '../../components/loading';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import FBSDK, { LoginManager , AccessToken, LoginButton} from 'react-native-fbsdk';
 
 class Login extends Component {
     constructor(props) {
@@ -30,6 +30,7 @@ class Login extends Component {
     }
 
     _fbAuth() {
+        
         LoginManager.logInWithReadPermissions(['public_profile']).then(
            function(result) {
               if (result.isCancelled) {
@@ -37,11 +38,15 @@ class Login extends Component {
               } else {
                  alert('Login success with permissions: '
                  +result.grantedPermissions.toString());
-              }
+              } 
            },
            function(error) {
               alert('Login fail with error: ' + error);
-           }
+           },
+           AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              alert(data.accessToken.toString()+'*******'+data.userID)
+            })
         );
      }
 
@@ -58,7 +63,6 @@ class Login extends Component {
             } else {
                 this.setState({ error: "Sai tên số điện thoại hoặc mật khẩu" });
             }
-
         });
 
     }
@@ -118,21 +122,31 @@ class Login extends Component {
                                 style={styles.btnLogin}
                                 onPress={() => this.login()}
                             >
-                                <Text style={{ width: 133, textAlign: 'center' }}>Đăng nhập</Text>
+                                <Text style={styles.textLogin}>Đăng nhập</Text>
                             </Button>
                             <Button bordered
                                 style={styles.btnRegister}
                                 onPress={() => this.props.navigation.navigate('Signup')}
                             >
-                                <Text style={{ width: 133, textAlign: 'center', color: colors.light }}>Đăng kí</Text>
+                                <Text style={styles.textRegister}>Đăng kí</Text>
                             </Button>
                         </View>
-                        <Button transparent
-                        style={styles.btnTransparent}
-                        onPress={() => this._fbAuth()}
-                    >
-                        <Text style={{ color: colors.light }}>Facebook</Text>
-                    </Button>
+
+                    <LoginButton
+                    publishPermissions={["publish_actions"]}
+                    onLoginFinished={
+                      (error, result) => {
+                        if (error) {
+                          alert("Login failed with error: " + result.error);
+                        } else if (result.isCancelled) {
+                          alert("Login was cancelled");
+                        } else {
+                          alert("Login was successful with permissions: " + result.grantedPermissions)
+                        }
+                      }
+                    }
+                    onLogoutFinished={() => alert("User logged out")}/>
+                    
                         <Button transparent
                             style={styles.btnTransparent}
                             onPress={() => this.props.navigation.navigate("ForgetPass")}

@@ -69,5 +69,14 @@ export default StyleSheet.create({
     close:{
         color: colors.light,
         fontSize: 30
+    },
+    textRegister:{
+        width: deviceWidth/2.7 , 
+        textAlign: 'center',
+        color: colors.light 
+    },
+    textLogin:{
+        width: deviceWidth/2.7 , 
+        textAlign: 'center'
     }
 });
