@@ -7,7 +7,7 @@ import Notification from '../screens/Setting/MenuSetting/Notification';
 import Update from '../screens/Setting/MenuSetting/Update'
 export default (SettingStack = StackNavigator({
 
-    Setting:{
+    Setting: {
         screen: Setting,
         navigationOptions: {
             header: null
@@ -19,22 +19,22 @@ export default (SettingStack = StackNavigator({
             header: null
         }
     },
-    AboutUs:{
+    AboutUs: {
         screen: AboutUs,
-        navigationOptions:{
-            header:null
-        }
-    },
-    Notification:{
-        screen: Notification,
-        navigationOptions:{
+        navigationOptions: {
             header: null
         }
     },
-    Update:{
+    Notification: {
+        screen: Notification,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Update: {
         screen: Update,
-        navigationOptions:{
-            header:null
+        navigationOptions: {
+            header: null
         }
     }
 

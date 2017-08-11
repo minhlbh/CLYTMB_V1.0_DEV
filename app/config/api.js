@@ -8,6 +8,10 @@ var apiUrl = {
     forgotPassword: `${domain}api/Account/ForgotPassword`,
     listBenh: `${domain}api/CSDLYT/Benh_List`,
     detailBenh: `${domain}api/CSDLYT/Benh_Detail?Id=`,
+    channel:`${domain}api/Center/home_detail?i=0&tenmien=`,
+
 }
+
+
 
 export default apiUrl;

@@ -30,15 +30,19 @@ export default StyleSheet.create({
         color: '#999',
         fontWeight: 'bold'
     },
-    textDivider:{
-         color: '#999',
+    textDivider: {
+        color: '#999',
     },
     textChildMenu: {
         color: colors.light
     },
-    itemImage: { 
-        marginRight: 17, 
-        width: 65, 
-        height: 65 
+    itemImage: {
+        marginRight: 17,
+        width: 65,
+        height: 65
+    },
+    icon: {
+        width: 40,
+        height: 40
     }
 })

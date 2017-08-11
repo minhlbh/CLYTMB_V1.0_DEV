@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TabsRouter from './Routers/TabsRouter';
-import MainStackRouter from './Routers/MainStackRouter'
+import MainStackRouter from './Routers/MainStackRouter';
 
 class App extends Component {
     render(){

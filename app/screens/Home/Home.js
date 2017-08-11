@@ -97,6 +97,12 @@ class Home extends Component {
             <Container style={styles.container}>
                 {!this.state.isSearch ? (
                     <Header style={styles.header}>
+                        <Left>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
+                                <Thumbnail source={images.logo}
+                                    style={styles.icon} />
+                            </TouchableOpacity>
+                        </Left>
                         <Text style={styles.titleHeader}> Cloud y tế Trưởng Khoa</Text>
                         <Right >
                             <Button transparent dark
