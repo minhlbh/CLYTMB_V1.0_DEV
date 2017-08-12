@@ -30,15 +30,29 @@ class Login extends Component {
     }
 
     _loginFacebook() {   
+        this.setState({ loading: true });
         AccessToken.getCurrentAccessToken().then(
             (data) => {
                 fetch(`https://graph.facebook.com/me?fields=email&&access_token=${data.accessToken.toString()}`)
                 .then((response) => response.json())
                 .then((res) => {
-                   
-                    accountApi.checkFacebookLogin(data.userId, res.email, data.accessToken.toString()).then(response =>{
-                        console.log(data.accessToken.toString()+'******'+data.userId);
-                        alert(response.mess);
+                    console.log(data.accessToken.toString()+'******'+data.userID+'******'+res.email);
+                    accountApi.checkFacebookLogin(data.userID, res.email, data.accessToken.toString()).then(response =>{
+                        console.log(response);
+                        if(response == 'Email chưa được dùng đăng kí tài khoản nào!'){
+                            this.props.navigation.navigate("InputPhone", {
+                                id: data.userID,
+                                email: res.email,
+                                token: data.accessToken.toString()
+                            });
+                        }else if (response.access_token){
+                            this.props.navigation.navigate("Tabs");
+                            AsyncStorage.setItem('access_token', response.access_token);
+                            alert('Đăng nhập thành công với facebook');
+                        } else {
+                            alert(response);
+                        }
+                        this.setState({ loading: false });
                     }).catch((error) => {
                         alert(error)
                     })                 
@@ -129,8 +143,16 @@ class Login extends Component {
                                 <Text style={styles.textRegister}>Đăng kí</Text>
                             </Button>
                         </View>
+                        <Button transparent
+                            style={styles.btnTransparent}
+                            onPress={() => this.props.navigation.navigate("ForgetPass")}
+                        >
+                            <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
+                        </Button>
 
+                        <View style={styles.btnFaceContainer}>
                         <LoginButton
+                            style={styles.buttonFacebook}
                              readPermissions={["email"]}
                             onLoginFinished={
                                 (error, result) => {
@@ -144,13 +166,8 @@ class Login extends Component {
                                 }
                             }
                             onLogoutFinished={() => alert("User logged out")}/>
-                    
-                        <Button transparent
-                            style={styles.btnTransparent}
-                            onPress={() => this.props.navigation.navigate("ForgetPass")}
-                        >
-                            <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
-                        </Button>
+                            </View>
+                        
                         {this.state.loading ?
                             <Loading /> : <View />
                         }
