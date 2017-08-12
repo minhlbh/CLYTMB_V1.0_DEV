@@ -30,13 +30,12 @@ class Home extends Component {
             logo: '',
         };
     }
+
     componentWillMount() {
         var url = '';
-        // if((this.props.navigation.state.params.url) === undefined){
-        //     url = '' 
-        // } else {
-        //     url = this.props.navigation.state.params.url;
-        // }
+        if(this.props.navigation.state.params) {
+            url = this.props.navigation.state.params.url;
+          }
         homeApi.getMenu(url).then(res => {
             this.setState({
                 menuSave: res.home,

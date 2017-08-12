@@ -45,7 +45,9 @@ class SideBar extends Component {
                     <List
                         dataArray={this.state.data}
                         renderRow={data =>
-                            <ListItem button onPress={() => this.props.navigation.navigate('Home', { url: data.Domain })}>
+                            <ListItem button onPress={() => this.props.navigation.navigate('Tabs', {
+                                url: data.Domain
+                            })}>
                                 <Left>
                                     <Thumbnail active source={{ uri: data.Logo }} style={{ width: 35, height: 35 }} />
                                     <Body>

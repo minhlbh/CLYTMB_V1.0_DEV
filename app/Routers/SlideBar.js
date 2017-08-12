@@ -10,9 +10,6 @@ export default SlideBar = DrawerNavigator({
     SlideBar:{
         screen: Tabs,
     },
-    SideBar:{
-        screen: SideBar
-    },
     },{
     drawerWidth: 250,
     drawerPosition: 'left',
