@@ -15,68 +15,42 @@ import {
     StyleProvider,
     getTheme,
     variables,
-    Thumbnail
+    Thumbnail,
+    Body
 } from "native-base";
-
+import apiUrl from '../../config/api';
 import styles from "./styles";
-
-const datas = [
-    {
-        name: "vienphoi.com",
-        images: 'https://sharinglife.blob.core.windows.net/images/file_79b64e5e-9518-4044-9f8c-5bb30f7c08df.png'
-    },
-    {
-        name: 'viennhi.com',
-        images: 'https://sharinglife.blob.core.windows.net/images/file_f3400142-32d9-4cde-a6fa-c00c58e8660f.png'
-    },
-    {
-        name: 'vientim.com',
-        images: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Heart_anterior_exterior_view.jpg/1200px-Heart_anterior_exterior_view.jpg'
-    },
-    {
-        name: 'vienk.com',
-        images: 'https://sharinglife.blob.core.windows.net/images/file_3776d27a-c91e-4a26-a95c-077e2e61ff0a.png'
-    },
-    {
-        name: "vienphoi.com",
-        images: 'https://sharinglife.blob.core.windows.net/images/file_79b64e5e-9518-4044-9f8c-5bb30f7c08df.png'
-    },
-    {
-        name: 'viennhi.com',
-        images: 'https://sharinglife.blob.core.windows.net/images/file_f3400142-32d9-4cde-a6fa-c00c58e8660f.png'
-    },
-    {
-        name: 'vientim.com',
-        images: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Heart_anterior_exterior_view.jpg/1200px-Heart_anterior_exterior_view.jpg'
-    },
-    {
-        name: 'vienk.com',
-        images: 'https://sharinglife.blob.core.windows.net/images/file_3776d27a-c91e-4a26-a95c-077e2e61ff0a.png'
-    }
-];
 
 class SideBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: []
         };
     }
-
+    componentWillMount() {
+        return fetch(apiUrl.listSideBar)
+            .then((res) => res.json())
+            .then((res) => this.setState({ data: res.dssystem }))
+            .catch((error) => {
+                console.error(error);
+            })
+    }
     render() {
         return (
             <Container>
                 <Content>
                     <Thumbnail source={require('../../images/truongkhoa.png')} style={{ width: 150, height: 150, alignSelf: 'center' }} />
-                    <Text style={{ alignSelf: 'center', borderBottomWidth: 1, paddingBottom: 40 }}>Trang chủ</Text>
+                    <Text style={{ borderBottomWidth: 0.5, paddingBottom: 40 }}></Text>
                     <List
-                        dataArray={datas}
+                        dataArray={this.state.data}
                         renderRow={data =>
-                            <ListItem button onPress={() => this.props.navigation.navigate()}>
+                            <ListItem button onPress={() => this.props.navigation.navigate('Home', { url: data.Domain })}>
                                 <Left>
-                                    <Thumbnail active source={{ uri: data.images }} style={{ width: 35, height: 35 }} />
-                                    <Text>
-                                        {data.name}
-                                    </Text>
+                                    <Thumbnail active source={{ uri: data.Logo }} style={{ width: 35, height: 35 }} />
+                                    <Body>
+                                        <Text>{data.Ten}</Text>
+                                    </Body>
                                 </Left>
                             </ListItem>}
                     />

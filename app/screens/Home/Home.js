@@ -26,14 +26,24 @@ class Home extends Component {
             menu: [],
             menuSave: [],
             loading: true,
+            name: '',
+            logo: '',
         };
     }
     componentWillMount() {
-        homeApi.getMenu().then(res => {
+        var url = '';
+        // if((this.props.navigation.state.params.url) === undefined){
+        //     url = '' 
+        // } else {
+        //     url = this.props.navigation.state.params.url;
+        // }
+        homeApi.getMenu(url).then(res => {
             this.setState({
                 menuSave: res.home,
                 menu: res.home,
                 loading: false,
+                name: res.setting.ThuongHieu,
+                logo: res.setting.Logo
             })
         }).catch(error => {
             console.log(error);
@@ -99,11 +109,11 @@ class Home extends Component {
                     <Header style={styles.header}>
                         <Left>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
-                                <Thumbnail source={images.logo}
+                                <Thumbnail source={{ uri: this.state.logo }}
                                     style={styles.icon} />
                             </TouchableOpacity>
                         </Left>
-                        <Text style={styles.titleHeader}> Cloud y tế Trưởng Khoa</Text>
+                        <Text style={styles.titleHeader}> {this.state.name}</Text>
                         <Right >
                             <Button transparent dark
                                 onPress={() => this.setState({ isSearch: true })}

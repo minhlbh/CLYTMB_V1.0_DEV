@@ -3,6 +3,7 @@ import { StackNavigator, } from "react-navigation";
 import Home from '../screens/Home';
 import ListBenh from '../screens/HomeMenu/Benh';
 import DetailBenh from '../screens/HomeMenu/Benh/DetailBenh';
+import SideBar from '../components/sideBar';
 
 export default (HomeStack = StackNavigator({
     Home: {
@@ -22,5 +23,5 @@ export default (HomeStack = StackNavigator({
         navigationOptions: {
             header: null
         }
-    }
+    },
 }));
