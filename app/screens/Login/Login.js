@@ -29,26 +29,24 @@ class Login extends Component {
         };
     }
 
-    _fbAuth() {
-        
-        LoginManager.logInWithReadPermissions(['public_profile']).then(
-           function(result) {
-              if (result.isCancelled) {
-                 alert('Login cancelled');
-              } else {
-                 alert('Login success with permissions: '
-                 +result.grantedPermissions.toString());
-              } 
-           },
-           function(error) {
-              alert('Login fail with error: ' + error);
-           },
-           AccessToken.getCurrentAccessToken().then(
+    _loginFacebook() {   
+        AccessToken.getCurrentAccessToken().then(
             (data) => {
-              alert(data.accessToken.toString()+'*******'+data.userID)
-            })
-        );
-     }
+                fetch(`https://graph.facebook.com/me?fields=email&&access_token=${data.accessToken.toString()}`)
+                .then((response) => response.json())
+                .then((res) => {
+                   
+                    accountApi.checkFacebookLogin(data.userId, res.email, data.accessToken.toString()).then(response =>{
+                        console.log(data.accessToken.toString()+'******'+data.userId);
+                        alert(response.mess);
+                    }).catch((error) => {
+                        alert(error)
+                    })                 
+                }) 
+            }
+        )
+    }
+     
 
     login = () => {
         this.setState({ loading: true });
@@ -133,7 +131,7 @@ class Login extends Component {
                         </View>
 
                         <LoginButton
-                            publishPermissions={["publish_actions"]}
+                             readPermissions={["email"]}
                             onLoginFinished={
                                 (error, result) => {
                                     if (error) {
@@ -141,7 +139,7 @@ class Login extends Component {
                                     } else if (result.isCancelled) {
                                         alert("Login was cancelled");
                                     } else {
-                                        alert("Login was successful with permissions: " + result.grantedPermissions)
+                                        this._loginFacebook()
                                     }
                                 }
                             }

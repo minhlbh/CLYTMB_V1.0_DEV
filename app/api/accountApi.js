@@ -84,6 +84,23 @@ var accountApi = {
             body: postFormBody(details),
         })
             .then((response) => response.json())
+    },
+    checkFacebookLogin(id,email,token){
+        let details = {
+            id: id,
+            email: phone,
+            token: token,
+        };
+
+        var url = `${apiUrl.checkFacebookLogin}`;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postFormBody(details),
+        })
+            .then((response) => response.json())
     }
 };
 

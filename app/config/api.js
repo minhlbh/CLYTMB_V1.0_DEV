@@ -8,6 +8,7 @@ var apiUrl = {
     forgotPassword: `${domain}api/Account/ForgotPassword`,
     listBenh: `${domain}api/CSDLYT/Benh_List`,
     detailBenh: `${domain}api/CSDLYT/Benh_Detail?Id=`,
+    checkFacebookLogin: `${domain}api/Account/CheckFacebookLogin`
 }
 
 export default apiUrl;
