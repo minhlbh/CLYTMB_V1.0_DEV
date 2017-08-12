@@ -40,7 +40,7 @@ class SideBar extends Component {
         return (
             <Container>
                 <Content>
-                    <Thumbnail source={require('../../images/truongkhoa.png')} style={{ width: 150, height: 150, alignSelf: 'center' }} />
+                    <Thumbnail source={require('../../images/truongkhoa.png')} style={{ width: 150, height: 150, alignSelf: 'center', marginTop: 30 }} />
                     <Text style={{ borderBottomWidth: 0.5, paddingBottom: 40 }}></Text>
                     <List
                         dataArray={this.state.data}

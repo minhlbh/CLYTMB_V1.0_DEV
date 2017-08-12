@@ -10,7 +10,7 @@ export default Drawer = DrawerNavigator({
         screen: Tabs,
     },
     },{
-    drawerWidth: 250,
+    drawerWidth: 290,
     drawerPosition: 'left',
     contentComponent: props => <SideBar{...props}/>
     }
