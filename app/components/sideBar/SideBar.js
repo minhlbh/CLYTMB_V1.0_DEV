@@ -48,12 +48,13 @@ class SideBar extends Component {
                             <ListItem button onPress={() => this.props.navigation.navigate('Tabs', {
                                 url: data.Domain
                             })}>
-                                <Left>
-                                    <Thumbnail active source={{ uri: data.Logo }} style={{ width: 35, height: 35 }} />
-                                    <Body>
-                                        <Text>{data.Ten}</Text>
-                                    </Body>
+                                <Left style={{width: 50}}>
+                                    <Thumbnail square active source={{ uri: data.Logo }} style={{ width: 35, height: 35 }} />
+                                    <Body style={{marginTop: 8}}>
+                                    <Text>{data.Ten}</Text>
+                                </Body>
                                 </Left>
+                               
                             </ListItem>}
                     />
                 </Content>

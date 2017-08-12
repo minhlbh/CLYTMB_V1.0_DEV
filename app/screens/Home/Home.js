@@ -108,7 +108,7 @@ class Home extends Component {
                     <Header style={styles.header}>
                         <Left>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
-                                <Thumbnail source={{ uri: this.state.logo }}
+                                <Thumbnail square source={{ uri: this.state.logo }}
                                     style={styles.icon} />
                             </TouchableOpacity>
                         </Left>
