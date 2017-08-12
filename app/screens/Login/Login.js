@@ -31,34 +31,50 @@ class Login extends Component {
 
     _loginFacebook() {   
         this.setState({ loading: true });
-        AccessToken.getCurrentAccessToken().then(
-            (data) => {
-                fetch(`https://graph.facebook.com/me?fields=email&&access_token=${data.accessToken.toString()}`)
-                .then((response) => response.json())
-                .then((res) => {
-                    console.log(data.accessToken.toString()+'******'+data.userID+'******'+res.email);
-                    accountApi.checkFacebookLogin(data.userID, res.email, data.accessToken.toString()).then(response =>{
-                        console.log(response);
-                        if(response == 'Email chưa được dùng đăng kí tài khoản nào!'){
-                            this.props.navigation.navigate("InputPhone", {
-                                id: data.userID,
-                                email: res.email,
-                                token: data.accessToken.toString()
-                            });
-                        }else if (response.access_token){
-                            this.props.navigation.navigate("Tabs");
-                            AsyncStorage.setItem('access_token', response.access_token);
-                            alert('Đăng nhập thành công với facebook');
-                        } else {
-                            alert(response);
-                        }
-                        this.setState({ loading: false });
-                    }).catch((error) => {
-                        alert(error)
-                    })                 
-                }) 
-            }
+        LoginManager.logInWithReadPermissions(['email']).then(
+            function(result) {
+              if (result.isCancelled) {
+                alert('Đăng nhập được huỷ');
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                    (data) => {
+                        fetch(`https://graph.facebook.com/me?fields=email&&access_token=${data.accessToken.toString()}`)
+                        .then((response) => response.json())
+                        .then((res) => {
+                            accountApi.checkFacebookLogin(data.userID, res.email, data.accessToken.toString()).then(response =>{
+                                console.log(response);
+                                if(response == 'Email chưa được dùng đăng kí tài khoản nào!'){
+                                    this.props.navigation.navigate("InputPhone", {
+                                        id: data.userID,
+                                        email: res.email,
+                                        token: data.accessToken.toString()
+                                    });
+                                }else if (response.access_token){
+                                    this.props.navigation.navigate("Tabs");
+                                    AsyncStorage.setItem('access_token', response.access_token);
+                                    alert('Đăng nhập thành công với facebook');
+                                } else {
+                                    alert(response);
+                                    
+                                };      
+                            }).catch((error) => {
+                                alert(error)
+                                
+                            })                 
+                        })                    
+                    }
+                )             
+              }
+              
+            },
+            function(error) {
+              alert('Đăng nhập xảy ra lỗi: ' + error);
+              this.setState({ loading: false });
+            },
+            this.setState({ loading: false })
         )
+        
+        
     }
      
 
@@ -83,7 +99,7 @@ class Login extends Component {
         return (
             <Container style={styles.container}>
                 <Content scrollEnabled={false}>
-
+                
                     <View style={styles.logoContainer}>
                         <Button transparent 
                             onPress={()=> this.props.navigation.navigate('Setting')}
@@ -150,24 +166,13 @@ class Login extends Component {
                             <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
                         </Button>
 
-                        <View style={styles.btnFaceContainer}>
-                        <LoginButton
-                            style={styles.buttonFacebook}
-                             readPermissions={["email"]}
-                            onLoginFinished={
-                                (error, result) => {
-                                    if (error) {
-                                        alert("Login failed with error: " + result.error);
-                                    } else if (result.isCancelled) {
-                                        alert("Login was cancelled");
-                                    } else {
-                                        this._loginFacebook()
-                                    }
-                                }
-                            }
-                            onLogoutFinished={() => alert("User logged out")}/>
-                            </View>
                         
+                        <Button  transparent
+                             style={styles.btnTransparent}
+                            onPress={() => this._loginFacebook()}
+                        >
+                            <Icon style={styles.iconFace} name='logo-facebook' />
+                        </Button>                        
                         {this.state.loading ?
                             <Loading /> : <View />
                         }

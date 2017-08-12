@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { StackNavigator, TabNavigator } from "react-navigation";
 import Tabs from './TabsRouter';
 import LoginStack from './LoginStack';
-import SlideBar from './SlideBar'
+import Drawer from './Drawer'
 
 export default (StackNav = StackNavigator({
     Tabs: {
-        screen: SlideBar,
+        screen: Drawer,
         navigationOptions: {
             header: null
         }

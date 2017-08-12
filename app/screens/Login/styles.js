@@ -53,7 +53,7 @@ export default StyleSheet.create({
         borderColor: colors.dark
     },
     btnTransparent: {
-        marginTop: 20,
+        marginTop: 15,
         alignSelf: 'center',
     },
     activityIndicator: {
@@ -99,5 +99,9 @@ export default StyleSheet.create({
     btnFaceContainer:{
         alignItems: 'center',
         marginTop: 15
+    },
+    iconFace:{
+        color : '#3b5998',
+        fontSize: 40
     }
 });
