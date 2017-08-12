@@ -8,7 +8,9 @@ var apiUrl = {
     forgotPassword: `${domain}api/Account/ForgotPassword`,
     listBenh: `${domain}api/CSDLYT/Benh_List`,
     detailBenh: `${domain}api/CSDLYT/Benh_Detail?Id=`,
-    listSideBar: `${domain}api/Center/system_list/`
+    listSideBar: `${domain}api/Center/system_list/`,
+    checkFacebookLogin: `${domain}api/Account/CheckFacebookLogin`,
+    socialRegister: `${domain}api/Account/SocialRegister`,
 }
 
 

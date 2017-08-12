@@ -5,6 +5,7 @@ import Login from '../screens/Login';
 import InputCode from '../screens/Signup/InputCode';
 import ForgetPass from '../screens/ForgetPass';
 import ConfirmFP from '../screens/ForgetPass/ConfirmFP';
+import InputPhone from '../screens/Login/InputPhone';
 
 export default (LoginStack = StackNavigator({
     Login: {
@@ -37,5 +38,10 @@ export default (LoginStack = StackNavigator({
             header: null
         }
     },
-
+    InputPhone:{
+        screen: InputPhone,
+        navigationOptions: {
+           header: null
+       }
+    }
 }));

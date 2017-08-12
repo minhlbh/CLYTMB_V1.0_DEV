@@ -69,5 +69,35 @@ export default StyleSheet.create({
     close:{
         color: colors.light,
         fontSize: 30
+    },
+    textRegister:{
+        width: deviceWidth/2.7 , 
+        textAlign: 'center',
+        color: colors.light 
+    },
+    textLogin:{
+        width: deviceWidth/2.7 , 
+        textAlign: 'center'
+    }, form: {
+        marginLeft: 47,
+        marginRight: 47
+    },
+    form: {
+        marginLeft: 47,
+        marginRight: 47
+    },
+    header: {
+        backgroundColor: colors.header.background
+    },
+    textHeader: {
+        color: colors.header.text,
+    },
+    buttonFacebook:{
+        width: '100%',
+        height: 40
+    },
+    btnFaceContainer:{
+        alignItems: 'center',
+        marginTop: 15
     }
 });

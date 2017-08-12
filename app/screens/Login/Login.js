@@ -16,6 +16,7 @@ import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
 import Error from '../../components/error';
 import Loading from '../../components/loading';
+import FBSDK, { LoginManager , AccessToken, LoginButton} from 'react-native-fbsdk';
 
 class Login extends Component {
     constructor(props) {
@@ -27,6 +28,39 @@ class Login extends Component {
             loading: false
         };
     }
+
+    _loginFacebook() {   
+        this.setState({ loading: true });
+        AccessToken.getCurrentAccessToken().then(
+            (data) => {
+                fetch(`https://graph.facebook.com/me?fields=email&&access_token=${data.accessToken.toString()}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    console.log(data.accessToken.toString()+'******'+data.userID+'******'+res.email);
+                    accountApi.checkFacebookLogin(data.userID, res.email, data.accessToken.toString()).then(response =>{
+                        console.log(response);
+                        if(response == 'Email chưa được dùng đăng kí tài khoản nào!'){
+                            this.props.navigation.navigate("InputPhone", {
+                                id: data.userID,
+                                email: res.email,
+                                token: data.accessToken.toString()
+                            });
+                        }else if (response.access_token){
+                            this.props.navigation.navigate("Tabs");
+                            AsyncStorage.setItem('access_token', response.access_token);
+                            alert('Đăng nhập thành công với facebook');
+                        } else {
+                            alert(response);
+                        }
+                        this.setState({ loading: false });
+                    }).catch((error) => {
+                        alert(error)
+                    })                 
+                }) 
+            }
+        )
+    }
+     
 
     login = () => {
         this.setState({ loading: true });
@@ -41,7 +75,6 @@ class Login extends Component {
             } else {
                 this.setState({ error: "Sai tên số điện thoại hoặc mật khẩu" });
             }
-
         });
 
     }
@@ -101,22 +134,40 @@ class Login extends Component {
                                 style={styles.btnLogin}
                                 onPress={() => this.login()}
                             >
-                                <Text style={{ width: 133, textAlign: 'center' }}>Đăng nhập</Text>
+                                <Text style={styles.textLogin}>Đăng nhập</Text>
                             </Button>
                             <Button bordered
                                 style={styles.btnRegister}
                                 onPress={() => this.props.navigation.navigate('Signup')}
                             >
-                                <Text style={{ width: 133, textAlign: 'center', color: colors.light }}>Đăng kí</Text>
+                                <Text style={styles.textRegister}>Đăng kí</Text>
                             </Button>
                         </View>
-
                         <Button transparent
                             style={styles.btnTransparent}
                             onPress={() => this.props.navigation.navigate("ForgetPass")}
                         >
                             <Text style={{ color: colors.light }}>Quên mật khẩu ?</Text>
                         </Button>
+
+                        <View style={styles.btnFaceContainer}>
+                        <LoginButton
+                            style={styles.buttonFacebook}
+                             readPermissions={["email"]}
+                            onLoginFinished={
+                                (error, result) => {
+                                    if (error) {
+                                        alert("Login failed with error: " + result.error);
+                                    } else if (result.isCancelled) {
+                                        alert("Login was cancelled");
+                                    } else {
+                                        this._loginFacebook()
+                                    }
+                                }
+                            }
+                            onLogoutFinished={() => alert("User logged out")}/>
+                            </View>
+                        
                         {this.state.loading ?
                             <Loading /> : <View />
                         }

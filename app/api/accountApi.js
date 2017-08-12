@@ -84,6 +84,41 @@ var accountApi = {
             body: postFormBody(details),
         })
             .then((response) => response.json())
+    },
+    checkFacebookLogin(id,email,token){
+        let details = {
+            id: id,
+            email: email,
+            token: token,
+        };
+
+        var url = `${apiUrl.checkFacebookLogin}`;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postFormBody(details),
+        })
+            .then((response) => response.json())
+    },
+    socialRegister(id,token,phone,email){
+        let details = {
+            id: id,
+            email: email,
+            token: token,
+            phone: phone,
+        };
+
+        var url = `${apiUrl.socialRegister}`;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postFormBody(details),
+        })
+            .then((response) => response.json())
     }
 };
 
