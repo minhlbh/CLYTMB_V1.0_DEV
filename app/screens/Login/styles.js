@@ -20,8 +20,8 @@ export let getStyles = function  (colors) {
         marginTop: deviceHeight / 35,
     },
     logoImage: {
-        width: 150,
-        height: 150,
+        width: 130,
+        height: 130,
         alignSelf: 'center'
     },
     logoText: {

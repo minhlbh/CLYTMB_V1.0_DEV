@@ -11,6 +11,7 @@ var apiUrl = {
     listSideBar: `${domain}api/Center/system_list/`,
     checkFacebookLogin: `${domain}api/Account/CheckFacebookLogin`,
     socialRegister: `${domain}api/Account/SocialRegister`,
+    userInfo:`${domain}api/Account/UserInfo`
 }
 
 
