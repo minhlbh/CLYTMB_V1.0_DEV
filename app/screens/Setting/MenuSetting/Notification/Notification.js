@@ -3,13 +3,22 @@ import {
     Container, Header, Left, Button, Icon, Title, Right, Content, List, ListItem, Body, Switch, Text
 } from 'native-base';
 import styles from './styles'
-
+import PushController from './PushController';
+import PushNotification from 'react-native-push-notification';
 export default class Notification extends Component {
     constructor(props) {
         super(props);
         this.state = {
             value: false
         }
+    }
+
+    handleNotification(){
+        PushNotification.localNotification({
+            title: "My Notification Title",
+            message: "My Notification Message", // (required)
+            //date: new Date(Date.now() + (60 * 1000)).toISOString // in 60 secs
+          });
     }
     render() {
         return (
@@ -37,6 +46,12 @@ export default class Notification extends Component {
                                 />
                             </Right>
                         </ListItem>
+                        <Button
+                            onPress={() => this.handleNotification()}
+                        >
+                            <Text>Show notification</Text>
+                        </Button>
+                        <PushController />
                     </List>
                 </Content>
             </Container>
