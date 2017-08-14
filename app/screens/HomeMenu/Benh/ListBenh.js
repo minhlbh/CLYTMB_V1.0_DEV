@@ -11,8 +11,9 @@ import {
 } from 'native-base';
 import { FlatList, } from 'react-native';
 import medicalApi from '../../../api/medicalApi';
-import styles from './styles';
+import {getStyles} from './styles';
 import Loading from '../../../components/loading';
+import { colors } from '../../../config/styles';
 const history = [
     {
         "Id": 49517,
@@ -103,6 +104,7 @@ class ListBenh extends Component {
     }
 
     render() {
+        let styles = getStyles(colors);
         if (!this.state.isSearch) {
             return (
                 <Container style={styles.container}>

@@ -10,7 +10,7 @@ import {
     Item
 } from 'native-base';
 import { Image, AsyncStorage } from 'react-native';
-import styles from "./styles";
+import {getStyles} from "./styles";
 import images from '../../config/images';
 import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
@@ -96,6 +96,7 @@ class Login extends Component {
     }
 
     render() {
+        let styles = getStyles(colors);
         return (
             <Container style={styles.container}>
                 <Content scrollEnabled={false}>
@@ -106,7 +107,7 @@ class Login extends Component {
                         >
                             <Icon style={styles.close} name='md-close' />
                         </Button>
-                        <Image source={images.logo} style={styles.logoImage} />
+                        <Image source={{uri : images.logo}} style={styles.logoImage} />
                         <Text style={styles.logoText}> Trưởng Khoa </Text>
                     </View>
                     <View style={styles.bg}>

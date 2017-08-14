@@ -13,11 +13,12 @@ import {
     Row
 } from 'native-base';
 console.disableYellowBox = true;
-import styles from "./styles";
+import {getStyles} from "./styles";
 import images from '../../config/images';
 import homeApi from '../../api/homeApi';
 import Loading from '../../components/loading';
-
+import { setColors , colors} from '../../config/styles';
+import {setLogo} from '../../config/images';
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -26,8 +27,7 @@ class Home extends Component {
             menu: [],
             menuSave: [],
             loading: true,
-            name: '',
-            logo: '',
+            setting: []
         };
     }
 
@@ -37,13 +37,15 @@ class Home extends Component {
             url = this.props.navigation.state.params.url;
           }
         homeApi.getMenu(url).then(res => {
+            setColors(res.setting.MauDam,res.setting.MauNhat);
+            setLogo(res.setting.Logo);
             this.setState({
                 menuSave: res.home,
                 menu: res.home,
                 loading: false,
-                name: res.setting.ThuongHieu,
-                logo: res.setting.Logo
-            })
+                setting: res.setting,
+            });
+            
         }).catch(error => {
             console.log(error);
         })
@@ -102,17 +104,18 @@ class Home extends Component {
 
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container style={styles.container}>
                 {!this.state.isSearch ? (
                     <Header style={styles.header}>
                         <Left>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
-                                <Thumbnail square source={{ uri: this.state.logo }}
+                                <Thumbnail square source={{ uri: this.state.setting.Logo }}
                                     style={styles.icon} />
                             </TouchableOpacity>
                         </Left>
-                        <Text style={styles.titleHeader}> {this.state.name}</Text>
+                        <Text style={styles.titleHeader}> {this.state.setting.ThuongHieu}</Text>
                         <Right >
                             <Button transparent dark
                                 onPress={() => this.setState({ isSearch: true })}
@@ -135,7 +138,7 @@ class Home extends Component {
                             <Button transparent
                                 onPress={() => this.setState({ isSearch: false, menu: this.state.menuSave })}
                             >
-                                <Text style={styles.textHeader}>Cancel</Text>
+                                <Text style={[styles.textHeader,{color: colors.dark}]}>Cancel</Text>
                             </Button>
                         </Header>
                     )}
@@ -162,7 +165,7 @@ class Home extends Component {
                                         <CardItem>
                                             <Image style={styles.itemImage} source={{ uri: item.Images[0] }} />
                                             <Body>
-                                                <Text style={styles.textChildMenu}>
+                                                <Text style={{color: colors.light}}>
                                                     {this.toEtc(item.Ten, 29)}
                                                 </Text>
                                                 <Text note>{this.toEtc(this.replaceHtml(item.tomtat), 95)}</Text>
