@@ -6,10 +6,14 @@ import {
     List, ListItem,
     Icon
 } from 'native-base';
-import styles from './styles';
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
+
 class Setting extends Component {
 
     render() {
+        let styles = getStyles(colors);
+
         const list = [
             {
                 title: 'Đăng nhập',

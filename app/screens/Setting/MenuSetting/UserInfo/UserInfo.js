@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     Container, Content, View, List, ListItem, Left, Image, Body, Right, Item, Label, Input, Fab, Button, Icon, Text, Header, Thumbnail, Title
 } from 'native-base'
+import { getStyles } from "./styles";
 import { colors } from '../../../../config/styles';
-import styles from './styles';
+import images from '../../../../config/images'
 export default class UserInfo extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +21,8 @@ export default class UserInfo extends Component {
         };
     }
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container>
                 <Header style={styles.header}>
@@ -65,7 +68,7 @@ export default class UserInfo extends Component {
                         </List>
                     </View>
                     <View style={styles.panel2}>
-                        <Text>Thông tin tài khoản</Text>
+                        <Text style={{fontSize:30}}>Thông tin tài khoản</Text>
                         <Item>
                             <Label style={styles.label}>Họ và tên:</Label>
                             <Input

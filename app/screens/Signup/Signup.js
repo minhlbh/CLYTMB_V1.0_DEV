@@ -10,7 +10,8 @@ import {
     Col, Row,
     View
 } from 'native-base';
-import styles from "./styles";
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
 import Error from '../../components/error';
 
@@ -50,6 +51,8 @@ class Signup extends Component {
     }
 
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container style={styles.container}>
                 {/* START HEADER*/}
@@ -126,7 +129,7 @@ class Signup extends Component {
                     </Button>
 
                     {this.state.error ?
-                        <Error error={this.state.error}/>
+                        <Error error={this.state.error} />
                         : <View ><Row ></Row></View>
                     }
                 </Content>

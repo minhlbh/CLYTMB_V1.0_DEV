@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Container, Header, Left, Button, Icon, Title, Right, Content, List, ListItem, Body, Switch, Text
 } from 'native-base';
-import styles from './styles'
+import { getStyles } from "./styles";
+import { colors } from '../../../../config/styles';
 
 export default class Notification extends Component {
     constructor(props) {
@@ -12,6 +13,8 @@ export default class Notification extends Component {
         }
     }
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container>
                 <Header style={styles.header}>

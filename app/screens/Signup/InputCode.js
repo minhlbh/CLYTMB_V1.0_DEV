@@ -16,7 +16,8 @@ import {
     Input,
     View
 } from "native-base";
-import styles from "./styles";
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 import accountApi from '../../api/accountApi';
 
 class InputCode extends Component {
@@ -37,6 +38,8 @@ class InputCode extends Component {
 
     }
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container style={styles.container}>
                 <Header style={styles.header} >

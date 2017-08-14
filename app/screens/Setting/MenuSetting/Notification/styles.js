@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../config/styles';
 
-export default StyleSheet.create({
+export let getStyles = function  (colors) {
+    return StyleSheet.create({
     textHeader: {
         color: colors.header.text,
         marginTop: 15
@@ -13,3 +14,4 @@ export default StyleSheet.create({
         color: colors.background,
     },
 })
+}

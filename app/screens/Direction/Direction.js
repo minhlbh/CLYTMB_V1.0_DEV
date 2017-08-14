@@ -13,7 +13,7 @@ import {
     ListItem,
     Thumbnail
 } from 'native-base';
-import styles from "./styles";
+import { getStyles } from "./styles";
 import { colors } from '../../config/styles';
 import TabDirection from './TabDirection';
 class Direction extends Component {
@@ -24,6 +24,7 @@ class Direction extends Component {
         }
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container>
 
@@ -40,18 +41,18 @@ class Direction extends Component {
                 </Header>
 
                 {this.state.isSearch ? (
-                    <Tabs tabBarUnderlineStyle= {styles.underlineTab}>
-                        <Tab heading="Bác sĩ" 
+                    <Tabs tabBarUnderlineStyle={styles.underlineTab}>
+                        <Tab heading="Bác sĩ"
                             activeTextStyle={styles.activeTextTab}
                         >
                             <TabDirection tabNum='1' />
                         </Tab>
-                        <Tab heading="Bệnh viện" 
-                            activeTextStyle={styles.activeTextTab} 
-                        >                                             
+                        <Tab heading="Bệnh viện"
+                            activeTextStyle={styles.activeTextTab}
+                        >
                             <TabDirection tabNum='2' />
                         </Tab>
-                        <Tab heading="Phòng khám" 
+                        <Tab heading="Phòng khám"
                             activeTextStyle={styles.activeTextTab}
                         >
                             <TabDirection tabNum='3' />

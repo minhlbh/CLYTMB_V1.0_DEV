@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../config/styles';
 
-export default StyleSheet.create({
+export let getStyles = function  (colors) {
+    return StyleSheet.create({
     header: {
         backgroundColor: colors.header.background
     },
@@ -14,7 +15,7 @@ export default StyleSheet.create({
         color: 'white'
     },
     label: {
-        color: '#2A8FBD',
+        color: colors.dark,
         fontSize: 15,
         paddingTop: 15,
     },
@@ -26,7 +27,7 @@ export default StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 15,
         paddingLeft: 15,
-        backgroundColor: '#2A8FBD'
+        backgroundColor: colors.dark
     },
     panel2: {
         paddingLeft: 20,
@@ -38,3 +39,4 @@ export default StyleSheet.create({
     }
 
 })
+}

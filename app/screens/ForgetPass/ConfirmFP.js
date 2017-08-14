@@ -16,7 +16,8 @@ import {
     Input,
     View
 } from "native-base";
-import styles from './styles';
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 import { Alert, AsyncStorage } from "react-native";
 import Error from '../../components/error';
 import accountApi from '../../api/accountApi';
@@ -63,6 +64,7 @@ class ConfirmFP extends Component {
     }
 
     render() {
+        let styles = getStyles(colors);
         return (
             <Container style={styles.container}>
                 <Header style={styles.header} >

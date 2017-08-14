@@ -13,7 +13,8 @@ import {
     Col,
     Row
 } from 'native-base';
-import styles from './styles';
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 
 class News extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class News extends Component {
         };
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container>
                 {!this.state.isSearch ? (
@@ -32,26 +34,26 @@ class News extends Component {
                             <Title style={styles.textHeader}>Tin tức</Title>
                         </Body>
                         <Right >
-                        <Button transparent dark 
-                            onPress ={() => this.setState({isSearch: true})}
-                        >
-                            <Icon style={styles.textHeader} name='md-search' />
-                        </Button>
-                    </Right>
+                            <Button transparent dark
+                                onPress={() => this.setState({ isSearch: true })}
+                            >
+                                <Icon style={styles.textHeader} name='md-search' />
+                            </Button>
+                        </Right>
                     </Header>
                 ) : (
-                    <Header style={styles.header} searchBar rounded>
-                        <Item>
-                            <Icon name="ios-search" />
-                            <Input placeholder="Search" />
-                        </Item>
-                        <Button transparent
-                            onPress={() => this.setState({ isSearch: false })}
-                        >
-                            <Text style={styles.textHeader}>Cancel</Text>
-                        </Button>
-                    </Header>
-                )}
+                        <Header style={styles.header} searchBar rounded>
+                            <Item>
+                                <Icon name="ios-search" />
+                                <Input placeholder="Search" />
+                            </Item>
+                            <Button transparent
+                                onPress={() => this.setState({ isSearch: false })}
+                            >
+                                <Text style={styles.textHeader}>Cancel</Text>
+                            </Button>
+                        </Header>
+                    )}
                 < Content >
                     <Grid>
                         <Row>

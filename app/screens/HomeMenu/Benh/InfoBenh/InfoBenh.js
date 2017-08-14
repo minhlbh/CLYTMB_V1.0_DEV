@@ -13,35 +13,37 @@ import {
     View,
     H3
 } from 'native-base';
-import { FlatList, Image ,WebView,Linking} from 'react-native';
+import { FlatList, Image, WebView, Linking } from 'react-native';
 import medicalApi from '../../../../api/medicalApi';
-import styles from './styles';
+import { getStyles } from "./styles";
 import HTMLView from 'react-native-htmlview';
+import { colors } from '../../../../config/styles';
 
 class OpenURLButton extends React.Component {
-  static propTypes = {
-    url: React.PropTypes.string,
-  };
+    static propTypes = {
+        url: React.PropTypes.string,
+    };
 
-  handleClick = () => {
-    Linking.canOpenURL(this.props.url).then(supported => {
-      if (supported) {
-        Linking.openURL(this.props.url);
-      } else {
-        console.log('Don\'t know how to open URI: ' + this.props.url);
-      }
-    });
-  };
+    handleClick = () => {
+        Linking.canOpenURL(this.props.url).then(supported => {
+            if (supported) {
+                Linking.openURL(this.props.url);
+            } else {
+                console.log('Don\'t know how to open URI: ' + this.props.url);
+            }
+        });
+    };
 
-  render() {
-    return (
-        <Button transparent light
-            onPress={this.handleClick}>
-        >
+    render() {
+        let styles = getStyles(colors);
+        return (
+            <Button transparent light
+                onPress={this.handleClick}>
+                >
             <Text style={styles.text}>Open {this.props.url}</Text>
-          </Button>
-    );
-  }
+            </Button>
+        );
+    }
 }
 
 
@@ -73,11 +75,13 @@ class InfoBenh extends Component {
             )
                 break;
             case 5: return (<WebView
-                    source={{ html: '<iframe width="345" height="230"src="'
-                                    + Dulieu.replace('https://youtu.be','https://www.youtube.com/embed') 
-                                    +'"></iframe>' }}
-                    style={styles.video}
-                    />
+                source={{
+                    html: '<iframe width="345" height="230"src="'
+                    + Dulieu.replace('https://youtu.be', 'https://www.youtube.com/embed')
+                    + '"></iframe>'
+                }}
+                style={styles.video}
+            />
             )
                 break;
             default:
@@ -92,22 +96,22 @@ class InfoBenh extends Component {
         return (
             <Container>
                 <Content style={styles.content}>
-                        <HTMLView
-                            value={detail.TomTat}
-                        />
-                        {!detail.DsPhanTu ? <View /> :
-                            detail.DsPhanTu.map((listContent) => (
-                                <View style={styles.phantuContainer}>
-                                    <H3 style={{ marginBottom: 5 }}>{listContent.Ten}</H3>
-                                    {listContent.NoiDung.DsDuLieuNoiDung.map((DuLieuNoiDung) => (
-                                        <View>
-                                            {this.rederDuLieu(DuLieuNoiDung.LoaiDuLieu, DuLieuNoiDung.Dulieu, detail.LinkAnh)}
-                                            <Text>{DuLieuNoiDung.TieuDe}</Text>
-                                        </View>
-                                    ))}
-                                </View>
-                            ))}
-                    
+                    <HTMLView
+                        value={detail.TomTat}
+                    />
+                    {!detail.DsPhanTu ? <View /> :
+                        detail.DsPhanTu.map((listContent) => (
+                            <View style={styles.phantuContainer}>
+                                <H3 style={{ marginBottom: 5 }}>{listContent.Ten}</H3>
+                                {listContent.NoiDung.DsDuLieuNoiDung.map((DuLieuNoiDung) => (
+                                    <View>
+                                        {this.rederDuLieu(DuLieuNoiDung.LoaiDuLieu, DuLieuNoiDung.Dulieu, detail.LinkAnh)}
+                                        <Text>{DuLieuNoiDung.TieuDe}</Text>
+                                    </View>
+                                ))}
+                            </View>
+                        ))}
+
                 </Content>
             </Container>
         )
