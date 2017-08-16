@@ -1,6 +1,7 @@
 import React, {
     Component
 } from 'react';
+import {Text} from 'native-base';
 import PushNotification from 'react-native-push-notification';
 
 export default class PushController extends Component {
@@ -9,15 +10,14 @@ export default class PushController extends Component {
             // (optional) Called when Token is generated (iOS and Android)
             onRegister: function(token) {
                 console.log( 'TOKEN:', token );
+                alert(token)
             },
             // (required) Called when a remote or local notification is opened or received
             onNotification: function (notification) {
                 console.log('NOTIFICATION:', notification);
             },
-            senderID: "12345",
-
+            senderID: "YOUR GCM SENDER ID",
             popInitialNotification: true,
-            
             requestPermissions: true,
         })
     }

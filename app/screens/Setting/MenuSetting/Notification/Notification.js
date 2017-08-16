@@ -11,6 +11,7 @@ export default class Notification extends Component {
         this.state = {
             value: false
         }
+        console.log('Phuc DO');
     }
 
     handleNotification(){
