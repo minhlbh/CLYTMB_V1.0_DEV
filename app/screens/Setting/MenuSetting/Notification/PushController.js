@@ -16,7 +16,7 @@ export default class PushController extends Component {
             onNotification: function (notification) {
                 console.log('NOTIFICATION:', notification);
             },
-            senderID: "YOUR GCM SENDER ID",
+            senderID: "452307350361",
             popInitialNotification: true,
             requestPermissions: true,
         })
