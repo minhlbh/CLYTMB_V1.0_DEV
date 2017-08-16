@@ -95,7 +95,7 @@ class ListThuoc extends Component {
                                     <Body >
                                         <Label>
                                         <Text style={styles.textHeader}>{item.Name}</Text>
-                                        <Text> ({item.HamLuong})</Text>
+                                        <Text style={styles.text} note> {(item.HamLuong)}</Text>
                                         </Label>
                                         <Label>
                                             <Icon style={styles.icon} name='ios-home' />

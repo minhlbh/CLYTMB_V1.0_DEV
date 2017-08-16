@@ -14,7 +14,7 @@ export default StyleSheet.create({
         color: colors.header.text,
     },
     icon: {
-        color: colors.dark,
+        color: colors.gray,
         fontSize:20
     },
     iconBack: {
