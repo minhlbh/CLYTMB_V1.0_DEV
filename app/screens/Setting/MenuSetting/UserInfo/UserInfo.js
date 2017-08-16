@@ -7,7 +7,7 @@ import { getStyles } from "./styles";
 import { colors } from '../../../../config/styles';
 import images from '../../../../config/images';
 import apiUrl from '../../../../config/api';
-import Login from '../../../Login'
+import accountApi from '../../../../api/accountApi';
 export default class UserInfo extends Component {
     constructor(props) {
         super(props);
@@ -17,27 +17,24 @@ export default class UserInfo extends Component {
             name: '',
             avatar: '',
             phone: '',
-            address: ''
+            address: '',
+            value: ''
 
         };
         AsyncStorage.getItem('access_token').then((value) => {
-            if (value) {
+            if (value == null) {
                 alert('Bạn chưa đăng nhập')
-                alert(value);
                 this.props.navigation.navigate("Login");
-            } 
+            } else {
+                accountApi.getUserInfo(value).then((res) => this.setState(
+                        { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address },
+
+                        alert(res.value)
+                    ))
+            }
         })
     }
-    componentWillMount() {
-        // return (
-        //     fetch(apiUrl.userInfo)
-        //         .then((res) => res.json())
-        //         .then((res) => this.setState(
-        //             { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address }
-        //         ))
-        // )
-        // this.checkToken();
-    }
+
     render() {
         let styles = getStyles(colors);
 
