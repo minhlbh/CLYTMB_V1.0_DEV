@@ -4,6 +4,8 @@ import {
 } from 'native-base';
 import { getStyles } from "./styles";
 import { colors } from '../../../../config/styles';
+import PushController from './PushController';
+import PushNotification from 'react-native-push-notification';
 
 export default class Notification extends Component {
     constructor(props) {
@@ -11,6 +13,15 @@ export default class Notification extends Component {
         this.state = {
             value: false
         }
+        console.log('Phuc DO');
+    }
+
+    handleNotification(){
+        PushNotification.localNotification({
+            title: "My Notification Title",
+            message: "My Notification Message", // (required)
+            //date: new Date(Date.now() + (60 * 1000)).toISOString // in 60 secs
+          });
     }
     render() {
         let styles = getStyles(colors);
@@ -40,6 +51,12 @@ export default class Notification extends Component {
                                 />
                             </Right>
                         </ListItem>
+                        <Button
+                            onPress={() => this.handleNotification()}
+                        >
+                            <Text>Show notification</Text>
+                        </Button>
+                        <PushController />
                     </List>
                 </Content>
             </Container>

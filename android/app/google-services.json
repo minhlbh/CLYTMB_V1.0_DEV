@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "452307350361",
+    "project_id": "truong-khoa"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452307350361:android:3001a3e4598d3493",
+        "android_client_info": {
+          "package_name": "com.truongkhoa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452307350361-ukrtrsb8p1o6vu3cojkeefiq66gvgr2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3phkfZZv4viD4BFx9UKfExY7q3VVHvTk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
