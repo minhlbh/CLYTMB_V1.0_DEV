@@ -20,7 +20,7 @@ import {
 } from "native-base";
 import apiUrl from '../../config/api';
 import styles from "./styles";
-
+import {setColors}  from '../../config/styles';
 class SideBar extends Component {
     constructor(props) {
         super(props);
@@ -35,19 +35,22 @@ class SideBar extends Component {
             .catch((error) => {
                 console.error(error);
             })
-    }
+            setColors('#cc5262','"#ff7e91')
+        }
     render() {
         return (
             <Container>
-                <Content>
-                    <Thumbnail source={require('../../images/truongkhoa.png')} style={{ width: 150, height: 150, alignSelf: 'center', marginTop: 30 }} />
-                    <Text style={{ borderBottomWidth: 0.5, paddingBottom: 40 }}></Text>
+                <Content style={{marginTop: 30}}>
                     <List
                         dataArray={this.state.data}
                         renderRow={data =>
-                            <ListItem button onPress={() => this.props.navigation.navigate('Tabs', {
-                                url: data.Domain
-                            })}>
+                            <ListItem button onPress={() =>{
+                                setColors(data.MauDam, data.mauNhat);
+                                this.props.navigation.navigate('Tabs', {
+                                url: data.Domain,
+                            });
+                            
+                        }}>
                                 <Left style={{width: 50}}>
                                     <Thumbnail square active source={{ uri: data.Logo }} style={{ width: 35, height: 35 }} />
                                     <Body style={{marginTop: 8}}>

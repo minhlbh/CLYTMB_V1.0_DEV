@@ -10,14 +10,16 @@ import {
 } from 'native-base';
 import { FlatList, } from 'react-native';
 import medicalApi from '../../../api/medicalApi';
-import styles from './styles';
+import {getStyles} from './styles';
 import InfoBenh from './InfoBenh';
+import { colors } from '../../../config/styles';
 
 class DetailBenh extends Component {
     constructor(props) {
         super(props);
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container>
                 <Header hasTabs style={styles.header}>

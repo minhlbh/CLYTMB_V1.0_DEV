@@ -3,7 +3,9 @@ import { colors } from '../../config/styles';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
-export default StyleSheet.create({
+export let getStyles = function  (colors) {
+
+    return StyleSheet.create({
     container: {
         position: 'absolute',
         top: 0,
@@ -18,8 +20,8 @@ export default StyleSheet.create({
         marginTop: deviceHeight / 35,
     },
     logoImage: {
-        width: 150,
-        height: 150,
+        width: 130,
+        height: 130,
         alignSelf: 'center'
     },
     logoText: {
@@ -104,4 +106,4 @@ export default StyleSheet.create({
         color : '#3b5998',
         fontSize: 40
     }
-});
+})};

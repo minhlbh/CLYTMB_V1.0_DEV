@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native'
 import {
     Container, Content, View, List, ListItem, Left, Image, Body, Right, Item, Label, Input, Fab, Button, Icon, Text, Header, Thumbnail, Title
 } from 'native-base'
+import { getStyles } from "./styles";
 import { colors } from '../../../../config/styles';
-import styles from './styles';
+import images from '../../../../config/images';
+import apiUrl from '../../../../config/api';
+import accountApi from '../../../../api/accountApi';
 export default class UserInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             disabled: true,
-            name: 'Lê Đức Tiến',
-            phone: '01672034616',
-            position: 'Học viên',
-            email: 'Leductien1997123@gmail.com',
-            best: 'Không',
-            job: 'Không',
-            position2: 'Developer'
+            email: '',
+            name: '',
+            avatar: '',
+            phone: '',
+            address: '',
+            value: ''
 
         };
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value == null) {
+                alert('Bạn chưa đăng nhập')
+                this.props.navigation.navigate("Login");
+            } else {
+                accountApi.getUserInfo(value).then((res) => this.setState(
+                        { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address },
+
+                        alert(res.value)
+                    ))
+            }
+        })
     }
+
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container>
                 <Header style={styles.header}>
@@ -52,12 +70,12 @@ export default class UserInfo extends Component {
                         <List>
                             <ListItem>
                                 <Left>
-                                    <Thumbnail source={{ uri: 'http://lophocnauan.vn/profiles/lophocnauanvn/uploads/attach/post/images/1866.jpg' }}
+                                    <Thumbnail source={{ uri: this.state.avatar }}
                                         style={{ width: 100, height: 100 }} />
                                 </Left>
                                 <Body>
                                     <Text style={styles.textinfo}>{this.state.name}</Text>
-                                    <Text style={styles.textinfo}>@rockstar.tie</Text>
+                                    <Text style={styles.textinfo}>{this.state.email}</Text>
                                 </Body>
                                 <Right>
                                 </Right>
@@ -65,7 +83,7 @@ export default class UserInfo extends Component {
                         </List>
                     </View>
                     <View style={styles.panel2}>
-                        <Text>Thông tin tài khoản</Text>
+                        <Text style={{ fontSize: 30 }}>Thông tin tài khoản</Text>
                         <Item>
                             <Label style={styles.label}>Họ và tên:</Label>
                             <Input
@@ -89,8 +107,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                onChangeText={(position) => this.setState({ position })}
-                                value={this.state.position}>
+                                onChangeText={(position) => this.setState({ position })}>
                             </Input>
                         </Item>
                         <Item>
@@ -107,17 +124,16 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                onChangeText={(best) => this.setState({ best })}
-                                value={this.state.best}>
+                                onChangeText={(best) => this.setState({ best })}>
                             </Input>
                         </Item>
                         <Item>
-                            <Label style={styles.label}>Đơn vị công tác:</Label>
+                            <Label style={styles.label}>Địa chỉ:</Label>
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
                                 onChangeText={(job) => this.setState({ job })}
-                                value={this.state.job}>
+                                value={this.state.address}>
                             </Input>
                         </Item>
                         <Item>
@@ -125,8 +141,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                onChangeText={(position2) => this.setState({ position2 })}
-                                value={this.state.position2}>
+                                onChangeText={(position2) => this.setState({ position2 })}>
                             </Input>
                         </Item>
                     </View>

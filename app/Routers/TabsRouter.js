@@ -6,13 +6,13 @@ import SettingStack from './SettingStack';
 import News from '../screens/News';
 import Bookmark from '../screens/Bookmark';
 import Direction from '../screens/Direction';
-
+import {colors ,setColors} from '../config/styles'
 const Tabs = TabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => <Icon name="md-home"  style={{ color: tintColor }} />
+      tabBarIcon: ({ tintColor }) => <Icon name="md-home"  style={{ color: tintColor }} />,
     },
   },
 
@@ -49,7 +49,7 @@ const Tabs = TabNavigator({
 }, {
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      activeTintColor: '#0f9cb3',
+      activeTintColor: colors.dark,
       inactiveTintColor: '#CCC',
       showIcon: true,
       style: {
@@ -59,9 +59,10 @@ const Tabs = TabNavigator({
       },
       labelStyle: {
         fontSize: 8.5,
+        backgroundColor: colors.background
       },
       indicatorStyle:{
-        backgroundColor: '#0f9cb3',
+        backgroundColor: colors.light,
       },
     }
   });

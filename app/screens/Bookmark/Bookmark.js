@@ -14,7 +14,8 @@ import {
     Text
 } from "native-base";
 import TabBookmark from './TabBookmark';
-import styles from './styles';
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 class Bookmark extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +24,7 @@ class Bookmark extends Component {
         };
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container>
                 <Header hasTabs style={styles.header}>

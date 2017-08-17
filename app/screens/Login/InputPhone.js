@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
     Container,
     Header,
@@ -16,9 +16,11 @@ import {
     Row,
     View
 } from 'native-base';
-import styles from "./styles";
+import { getStyles } from "./styles";
 import accountApi from '../../api/accountApi';
 import Error from '../../components/error';
+import { colors } from '../../config/styles';
+
 
 class InputPhone extends Component {
     constructor(props) {
@@ -33,36 +35,38 @@ class InputPhone extends Component {
         var id = this.props.navigation.state.params.id;
         var to = this.props.navigation.state.params.token;
         //this.setState({ animating: true });
-        accountApi.socialRegister(id,to,p,em).then(res => {
+        accountApi.socialRegister(id, to, p, em).then(res => {
+            console.log(res)
+            if (!res.Id) {
+                this.setState({ error: res });
+                //this.setState({ animating: false });
+            } else {
                 console.log(res)
-                if (!res.Id) {
-                    this.setState({error: res});
-                    //this.setState({ animating: false });
-                } else {
-                    console.log(res)
-                    this.props.navigation.navigate("InputCode", {
-                            idU: res.Id,
-                            phone: res.Phone
-                        });
-                    //this.setState({ animating: false });
-                }
-            });
+                this.props.navigation.navigate("InputCode", {
+                    idU: res.Id,
+                    phone: res.Phone
+                });
+                //this.setState({ animating: false });
+            }
+        });
     }
 
     render() {
+        let styles = getStyles(colors);
+
         return (
             <Container style={styles.container}>
                 {/* START HEADER*/}
                 <Header style={styles.header}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.goBack()}>
-                            <Icon style={styles.textHeader} name='arrow-back'/>
+                            <Icon style={styles.textHeader} name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>
                         <Title style={styles.textHeader}>Nhập SĐT</Title>
                     </Body>
-                    <Right/>
+                    <Right />
                 </Header>
                 {/*END HEADER  */}
 
@@ -74,12 +78,12 @@ class InputPhone extends Component {
                     <Form style={styles.form}>
                         <Item regular>
                             <Input
-                                style={{textAlign: 'center'}}
+                                style={{ textAlign: 'center' }}
                                 placeholder="Nhập số điện thoại"
                                 placeholderTextColor="#999"
-                                onChangeText={(phone) => this.setState({phone})}
+                                onChangeText={(phone) => this.setState({ phone })}
                                 keyboardType="number-pad"
-                                returnKeyType={'done'}/>
+                                returnKeyType={'done'} />
                         </Item>
 
                         <Button block info style={styles.btn} onPress={() => this.signup()}>
@@ -89,11 +93,11 @@ class InputPhone extends Component {
                     </Form>
 
                     {this.state.error
-                        ? <Error error={this.state.error}/>
+                        ? <Error error={this.state.error} />
                         : <View >
                             <Row ></Row>
                         </View>
-}
+                    }
                 </Content>
                 {/* END BODY  */}
             </Container>

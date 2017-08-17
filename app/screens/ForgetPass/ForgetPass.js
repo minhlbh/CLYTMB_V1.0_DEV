@@ -16,7 +16,8 @@ import {
     Input,
     View
 } from "native-base";
-import styles from './styles';
+import { getStyles } from "./styles";
+import { colors } from '../../config/styles';
 import Error from '../../components/error';
 import accountApi from '../../api/accountApi';
 
@@ -50,6 +51,7 @@ class ForgetPass extends Component {
         }
     }
     render() {
+        let styles = getStyles(colors);
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
