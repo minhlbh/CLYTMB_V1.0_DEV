@@ -10,7 +10,7 @@ export default class PushController extends Component {
             // (optional) Called when Token is generated (iOS and Android)
             onRegister: function(token) {
                 console.log( 'TOKEN:', token );
-                alert(token)
+                alert(token);
             },
             // (required) Called when a remote or local notification is opened or received
             onNotification: function (notification) {
