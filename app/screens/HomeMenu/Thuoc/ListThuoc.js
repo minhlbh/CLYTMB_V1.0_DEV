@@ -66,6 +66,7 @@ class ListThuoc extends Component {
                     <Body>
                         <Title style={styles.textHeader}>Tra cứu thuốc</Title>
                     </Body>
+                    <Right />
                 </Header>
                 <View>
                     <Item style={{ marginLeft: 10 }}>
