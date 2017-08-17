@@ -60,6 +60,7 @@ class InfoBenh extends Component {
         });
     }
     rederDuLieu(LoaiDuLieu, Dulieu, LinkAnh) {
+        let styles = getStyles(colors);
         switch (LoaiDuLieu) {
             case 1: return (
                 <HTMLView
@@ -92,6 +93,7 @@ class InfoBenh extends Component {
 
 
     render() {
+        let styles = getStyles(colors);
         const detail = this.state.detail;
         return (
             <Container>
