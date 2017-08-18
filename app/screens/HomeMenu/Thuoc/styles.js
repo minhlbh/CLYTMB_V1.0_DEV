@@ -3,7 +3,9 @@ import { colors } from '../../../config/styles';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
-export default StyleSheet.create({
+export let getStyles = function  (colors) {
+
+    return StyleSheet.create({
     container: {
         backgroundColor: colors.background,
     },
@@ -28,5 +30,10 @@ export default StyleSheet.create({
     },
     text:{
         fontSize:14
-    }
+    },
+        button: {
+        backgroundColor: colors.dark,
+        marginTop: 20
+    },
 })
+}

@@ -123,9 +123,8 @@ var accountApi = {
     getUserInfo(value){
         var url = `${apiUrl.userInfo}`;
         return fetch(url,{
-            method: 'GET',
+            method: 'POST',
             header:{
-                //  'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `bearer ${value}` 
             }
         }).then((response) => response.json()).catch((e) => {

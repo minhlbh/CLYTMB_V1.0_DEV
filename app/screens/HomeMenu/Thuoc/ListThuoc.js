@@ -13,8 +13,9 @@ import {
 } from 'native-base';
 import { FlatList } from 'react-native';
 import drugApi from '../../../api/drugApi';
-import styles from './styles';
+import { getStyles } from "./styles";
 import Loading from '../../../components/loading';
+import { colors } from '../../../config/styles';
 
 class ListThuoc extends Component {
     constructor(props) {
@@ -53,7 +54,23 @@ class ListThuoc extends Component {
             })
         }
     }
+    _onEndReached = () => {
+        this.setState({ isLoading: true })
+        var page = this.state.page + 1;
+        drugApi.getDsThuoc(page).then(res => {
+            if (!res || res.length != 0) {
+                this.setState({
+                    page: res.DsThuoc.Trang,
+                    DsThuoc: [...this.state.DsThuoc, ...res.DsThuoc.DsThuoc],
+                    isLoading: false
+                })
+            }
+        });
+
+    }
+
     render() {
+        let styles = getStyles(colors);
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
@@ -80,12 +97,12 @@ class ListThuoc extends Component {
                         />
                     </Item>
                 </View>
+                <ListItem>
+                    {this.state.isLoading && <Loading />}
+                    <Right><Text style={styles.textDivider}>Tổng số {50 * this.state.page}/{this.state.tongsoThuoc} Thuốc</Text></Right>
+                </ListItem>
                 <Content>
                     <List >
-                        <ListItem>
-                            {this.state.isLoading && <Loading />}
-                            <Right><Text style={styles.textDivider}>Tổng số {50 * this.state.page}/{this.state.tongsoThuoc} Thuốc</Text></Right>
-                        </ListItem>
                         <FlatList
                             data={this.state.DsThuoc}
                             renderItem={({ item }) =>
@@ -94,8 +111,8 @@ class ListThuoc extends Component {
                                 }} >
                                     <Body >
                                         <Label>
-                                        <Text style={styles.textHeader}>{item.Name}</Text>
-                                        <Text style={styles.text} note> {(item.HamLuong)}</Text>
+                                            <Text style={styles.textHeader}>{item.Name}</Text>
+                                            <Text style={styles.text} note> {(item.HamLuong)}</Text>
                                         </Label>
                                         <Label>
                                             <Icon style={styles.icon} name='ios-home' />
@@ -110,6 +127,11 @@ class ListThuoc extends Component {
                                 </ListItem>}
                         />
                     </List>
+                    <Button full
+                    style={styles.button}
+                        onPress={() => this._onEndReached()}>
+                        <Text>Tải thêm danh sách</Text>
+                    </Button>
                 </Content>
             </Container>
         )
