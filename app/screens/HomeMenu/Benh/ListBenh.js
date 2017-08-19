@@ -11,7 +11,7 @@ import {
 } from 'native-base';
 import { FlatList, } from 'react-native';
 import medicalApi from '../../../api/medicalApi';
-import {getStyles} from './styles';
+import { getStyles } from './styles';
 import Loading from '../../../components/loading';
 import { colors } from '../../../config/styles';
 const history = [
@@ -75,7 +75,7 @@ class ListBenh extends Component {
 
     }
     _onEndReached = () => {
-        this.setState({isLoading: true})
+        this.setState({ isLoading: true })
         var page = this.state.page + 1;
         medicalApi.getDsBenh(page).then(res => {
             if (!res || res.length != 0) {
@@ -129,7 +129,7 @@ class ListBenh extends Component {
                     </Header>
                     <ListItem>
                         {this.state.isLoading && <Loading />}
-                        <Right><Text style={styles.textDivider}>Tổng số {50*this.state.page}/{this.state.tongSoBenh} Bệnh</Text></Right>
+                        <Right><Text style={styles.textDivider}>Tổng số {50 * this.state.page}/{this.state.tongSoBenh} Bệnh</Text></Right>
                     </ListItem>
                     <Content>
                         <List >
@@ -144,12 +144,13 @@ class ListBenh extends Component {
                                         </Body>
                                         <Icon style={styles.icon} name="ios-arrow-dropright" />
                                     </ListItem>}
-                                onEndReached={({ distanceFromEnd }) => {
-                                    this._onEndReached();
-                                }}
-                                onEndReachedThreshold={0.3}
                             />
                         </List>
+                        <Button full
+                            style={styles.button}
+                            onPress={() => this._onEndReached()}>
+                            <Text>Tải thêm danh sách</Text>
+                        </Button>
                     </Content>
                 </Container>
             )

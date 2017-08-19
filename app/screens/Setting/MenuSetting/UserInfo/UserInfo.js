@@ -18,7 +18,6 @@ export default class UserInfo extends Component {
             avatar: '',
             phone: '',
             address: '',
-            value: ''
 
         };
         AsyncStorage.getItem('access_token').then((value) => {
@@ -29,7 +28,7 @@ export default class UserInfo extends Component {
                 accountApi.getUserInfo(value).then((res) => this.setState(
                         { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address },
 
-                        alert(res.value)
+                        alert(value)
                     ))
             }
         })

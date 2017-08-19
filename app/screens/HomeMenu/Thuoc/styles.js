@@ -26,7 +26,7 @@ export let getStyles = function  (colors) {
     },
     textDivider: {
         color: '#999',
-        fontSize: 13
+        fontSize: 13,
     },
     text:{
         fontSize:14
@@ -35,5 +35,11 @@ export let getStyles = function  (colors) {
         backgroundColor: colors.dark,
         marginTop: 20
     },
+    ketquatimkiem:{
+        color: '#999',
+        fontSize: 15,
+        marginTop: 20,
+        marginLeft:15
+    }
 })
 }

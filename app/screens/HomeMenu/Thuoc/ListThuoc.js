@@ -30,7 +30,7 @@ class ListThuoc extends Component {
         }
     }
     componentWillMount() {
-        drugApi.getDsThuoc(this.state.page)
+        drugApi.getDsThuoc(1)
             .then((res) => {
                 this.setState({
                     DsThuoc: res.DsThuoc.DsThuoc,
@@ -43,7 +43,13 @@ class ListThuoc extends Component {
 
     search(key) {
         if (!key || key === null || key == '') {
-            this.setState({})
+            drugApi.getDsThuoc(1).then((res) => {
+                this.setState({
+                    DsThuoc: res.DsThuoc.DsThuoc,
+                    page: 1,
+                    isSearch: false
+                })
+            })
         } else {
             drugApi.getSearchResult(key).then(res => {
                 if (!res || res.length != 0) {
@@ -69,6 +75,14 @@ class ListThuoc extends Component {
 
     }
 
+    cancelSearch = () => {
+        this.componentWillMount();
+        this.setState({
+            isSearch: false,
+            key: ''
+        });
+
+    }
     render() {
         let styles = getStyles(colors);
         return (
@@ -91,18 +105,33 @@ class ListThuoc extends Component {
                             onChangeText={(key) => {
                                 this.search(key);
                                 this.setState({ key });
+                                this.setState({ isSearch: true })
                             }}
                             onSubmitEditing={() => this.search(this.state.key)}
-                            autoFocus={this.state.isSearch}
                         />
+                        {this.state.isSearch &&
+                            <Right>
+                                <Button transparent
+                                    onPress={() => this.cancelSearch()}
+                                >
+                                    <Icon name="md-close-circle" style={styles.textHeader} />
+                                </Button>
+                            </Right>}
                     </Item>
                 </View>
-                <ListItem>
-                    {this.state.isLoading && <Loading />}
-                    <Right><Text style={styles.textDivider}>Tổng số {50 * this.state.page}/{this.state.tongsoThuoc} Thuốc</Text></Right>
-                </ListItem>
+                {!this.state.isSearch ?
+                    <ListItem>
+                        {this.state.isLoading && <Loading />}
+
+                        <View><Text style={styles.textDivider}>Tổng số {50 * this.state.page}/{this.state.tongsoThuoc} Thuốc</Text></View>
+
+                    </ListItem>
+                    :
+                    <Text style={styles.ketquatimkiem}>KẾT QUẢ TÌM KIẾM:</Text>}
                 <Content>
                     <List >
+                        {!this.state.key == this.state.DsThuoc &&
+                            <Text style={styles.ketquatimkiem}>Thuốc bạn tìm không đúng hoặc chưa được cập nhật</Text>}
                         <FlatList
                             data={this.state.DsThuoc}
                             renderItem={({ item }) =>
@@ -127,11 +156,12 @@ class ListThuoc extends Component {
                                 </ListItem>}
                         />
                     </List>
-                    <Button full
-                    style={styles.button}
-                        onPress={() => this._onEndReached()}>
-                        <Text>Tải thêm danh sách</Text>
-                    </Button>
+                    {!this.state.isSearch &&
+                        <Button full
+                            style={styles.button}
+                            onPress={() => this._onEndReached()}>
+                            <Text>Tải thêm danh sách</Text>
+                        </Button>}
                 </Content>
             </Container>
         )
