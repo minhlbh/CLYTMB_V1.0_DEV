@@ -20,16 +20,32 @@ export default class UserInfo extends Component {
             address: '',
 
         };
+        editUserInfo = () => {
+            var na = this.state.name;
+            var em = this.state.email;
+            var ad = this.state.address;
+            var ph = this.state.phone
+            AsyncStorage.getItem('access_token').then((value) => {
+                accountApi.editUserInfo(value, na, ph, em, ad,).then((res) => this.setState({
+                    disabled: true,
+                    na: res.HoVaTen,
+                    ph: res.PhoneNumber,
+                    em: res.Email,
+                    ad: res.DiaChi,
+
+                }
+
+                ))
+            })
+        }
         AsyncStorage.getItem('access_token').then((value) => {
             if (value == null) {
                 alert('Bạn chưa đăng nhập')
                 this.props.navigation.navigate("Login");
             } else {
                 accountApi.getUserInfo(value).then((res) => this.setState(
-                        { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address },
-
-                        alert(value)
-                    ))
+                    { email: res.Email, name: res.HoVaTen, avatar: res.Avatar, phone: res.Phone, address: res.Address },
+                ))
             }
         })
     }
@@ -51,7 +67,7 @@ export default class UserInfo extends Component {
                     <Right>
                         {!this.state.disabled ?
                             <Button transparent
-                                onPress={() => this.setState({ disabled: true })}
+                                onPress={() => editUserInfo()}
                             >
                                 <Icon style={styles.icon} active name='md-checkmark' />
                             </Button>
@@ -69,7 +85,7 @@ export default class UserInfo extends Component {
                         <List>
                             <ListItem>
                                 <Left>
-                                    <Thumbnail source={{ uri: this.state.avatar }}
+                                    <Thumbnail source={{ uri:'http://www.unl.edu/careers/images/staff_images/y_u_no_photo_Square.png'}}
                                         style={{ width: 100, height: 100 }} />
                                 </Left>
                                 <Body>
@@ -106,6 +122,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
+                                placeholder ="Thêm chức danh"
                                 onChangeText={(position) => this.setState({ position })}>
                             </Input>
                         </Item>
@@ -113,7 +130,7 @@ export default class UserInfo extends Component {
                             <Label style={styles.label}>Email:</Label>
                             <Input
                                 style={styles.textInput}
-                                disabled={this.state.disabled}
+                                disabled
                                 onChangeText={(email) => this.setState({ email })}
                                 value={this.state.email}>
                             </Input>
@@ -123,6 +140,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
+                                placeholder ="Thêm chuyên môn"
                                 onChangeText={(best) => this.setState({ best })}>
                             </Input>
                         </Item>
@@ -131,7 +149,8 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                onChangeText={(job) => this.setState({ job })}
+                                placeholder ="Thêm địa chỉ"
+                                onChangeText={(address) => this.setState({ address })}
                                 value={this.state.address}>
                             </Input>
                         </Item>
@@ -140,6 +159,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
+                                placeholder ="Thêm vị trí đăng kí"
                                 onChangeText={(position2) => this.setState({ position2 })}>
                             </Input>
                         </Item>

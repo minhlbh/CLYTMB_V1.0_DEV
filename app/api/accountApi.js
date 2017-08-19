@@ -85,7 +85,7 @@ var accountApi = {
         })
             .then((response) => response.json())
     },
-    checkFacebookLogin(id,email,token){
+    checkFacebookLogin(id, email, token) {
         let details = {
             id: id,
             email: email,
@@ -102,7 +102,7 @@ var accountApi = {
         })
             .then((response) => response.json())
     },
-    socialRegister(id,token,phone,email){
+    socialRegister(id, token, phone, email) {
         let details = {
             id: id,
             email: email,
@@ -120,17 +120,36 @@ var accountApi = {
         })
             .then((response) => response.json())
     },
-    getUserInfo(value){
+    getUserInfo(value) {
         var url = `${apiUrl.userInfo}`;
-        return fetch(url,{
+        return fetch(url, {
             method: 'POST',
-            header:{
-                'Authorization': `bearer ${value}` 
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'bearer ' + value
             }
         }).then((response) => response.json()).catch((e) => {
             alert(e)
         })
 
+    },
+    editUserInfo(value, name, phone, email, address, ) {
+        details = {
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+        };
+        var url = `${apiUrl.editUserInfo}`;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'bearer ' + value
+            },
+            body: postFormBody(details),
+        }).then((res) => res.json()).catch((e) => {
+        })
     }
 };
 

@@ -12,7 +12,8 @@ var apiUrl = {
     checkFacebookLogin: `${domain}api/Account/CheckFacebookLogin`,
     socialRegister: `${domain}api/Account/SocialRegister`,
     listThuoc:`${domain}api/CSDLYT/Thuoc_List`,
-    userInfo:`${domain}api/Account/UserInfo`
+    userInfo:`${domain}api/Account/UserInfo`,
+    editUserInfo: `${domain}api/Account/EditUInfo`
 }
 
 
