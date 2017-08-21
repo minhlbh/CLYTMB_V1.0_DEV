@@ -29,5 +29,10 @@ export let getStyles = function (colors) {
             backgroundColor: colors.dark,
             marginTop: 20
         },
+        button2: {
+            backgroundColor: colors.dark,
+            marginTop: 20,
+            height: 20,
+        },
     })
 }

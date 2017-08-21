@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
+import {TouchableHighlight} from 'react-native';
 import {
-    Container, Header, Left, Body, Right, Content,
+    Container, Header, Left, Body, Right, Content, List, ListItem,
     Text,
     Title,
     Tabs,
@@ -113,7 +113,28 @@ class InfoBenh extends Component {
                                 ))}
                             </View>
                         ))}
-
+                    <View style={{ marginTop: 30 }}>
+                        <Button full
+                            style={styles.button}>
+                            <Icon name='md-flag' />
+                            <Text>Report phá hoại</Text>
+                        </Button>
+                        <Button full
+                            style={styles.button}>
+                            <Icon name='md-alarm' />
+                            <Text>Đặt lịch khám</Text>
+                        </Button>
+                        <Button full
+                            style={styles.button}>
+                            <Icon name='md-add' />
+                            <Text>Theo dõi</Text>
+                        </Button>
+                        <Button full
+                            style={styles.button}>
+                            <Icon name='logo-facebook' />
+                            <Text>Share Facebook</Text>
+                        </Button>
+                    </View>
                 </Content>
             </Container>
         )

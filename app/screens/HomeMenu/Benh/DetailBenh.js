@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Header, Left, Body, Right, Content,
+    Container, Header, Left, Body, Right, Content, List, ListItem,
     Text,
     Title,
     Tabs,
@@ -10,9 +10,10 @@ import {
 } from 'native-base';
 import { FlatList, } from 'react-native';
 import medicalApi from '../../../api/medicalApi';
-import {getStyles} from './styles';
+import { getStyles } from './styles';
 import InfoBenh from './InfoBenh';
 import { colors } from '../../../config/styles';
+import EditHistory from './EditHistory'
 
 class DetailBenh extends Component {
     constructor(props) {
@@ -35,14 +36,17 @@ class DetailBenh extends Component {
 
                     <Right />
                 </Header>
-                 <Tabs >
+                <Tabs>
                     <Tab heading="Thông tin bệnh ">
-                        <InfoBenh id={this.props.navigation.state.params.id}/>
+                        <InfoBenh id={this.props.navigation.state.params.id} />
+                    </Tab>
+                    <Tab heading="Lịch sử chỉnh sửa">
+                        <EditHistory />
                     </Tab>
                     <Tab heading="Diễn đàn">
-                        <InfoBenh id={this.props.navigation.state.params.id}/>
+                        <InfoBenh id={this.props.navigation.state.params.id} />
                     </Tab>
-                </Tabs> 
+                </Tabs>
             </Container>
         )
     }
