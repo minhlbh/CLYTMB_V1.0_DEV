@@ -122,7 +122,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                placeholder ="Thêm chức danh"
+                                placeholder ="Chưa có"
                                 onChangeText={(position) => this.setState({ position })}>
                             </Input>
                         </Item>
@@ -140,7 +140,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                placeholder ="Thêm chuyên môn"
+                                placeholder ="Chưa có"
                                 onChangeText={(best) => this.setState({ best })}>
                             </Input>
                         </Item>
@@ -149,7 +149,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                placeholder ="Thêm địa chỉ"
+                                placeholder ="Chưa có"
                                 onChangeText={(address) => this.setState({ address })}
                                 value={this.state.address}>
                             </Input>
@@ -159,7 +159,7 @@ export default class UserInfo extends Component {
                             <Input
                                 style={styles.textInput}
                                 disabled={this.state.disabled}
-                                placeholder ="Thêm vị trí đăng kí"
+                                placeholder ="Chưa có"
                                 onChangeText={(position2) => this.setState({ position2 })}>
                             </Input>
                         </Item>
