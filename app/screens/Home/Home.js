@@ -13,12 +13,12 @@ import {
     Row
 } from 'native-base';
 console.disableYellowBox = true;
-import {getStyles} from "./styles";
+import { getStyles } from "./styles";
 import images from '../../config/images';
 import homeApi from '../../api/homeApi';
 import Loading from '../../components/loading';
-import { setColors , colors} from '../../config/styles';
-import {setLogo} from '../../config/images';
+import { setColors, colors } from '../../config/styles';
+import { setLogo } from '../../config/images';
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -27,25 +27,27 @@ class Home extends Component {
             menu: [],
             menuSave: [],
             loading: true,
-            setting: []
+            setting: [],
+            mobilerun: false
         };
     }
 
     componentWillMount() {
         var url = '';
-        if(this.props.navigation.state.params) {
+        if (this.props.navigation.state.params) {
             url = this.props.navigation.state.params.url;
-          }
+        }
         homeApi.getMenu(url).then(res => {
-            setColors(res.setting.MauDam,res.setting.MauNhat);
+            setColors(res.setting.MauDam, res.setting.MauNhat);
             setLogo(res.setting.Logo);
             this.setState({
                 menuSave: res.home,
                 menu: res.home,
                 loading: false,
                 setting: res.setting,
+                mobilerun: res.home[4].MobileRun
             });
-            
+
         }).catch(error => {
             console.log(error);
         })
@@ -138,16 +140,14 @@ class Home extends Component {
                             <Button transparent
                                 onPress={() => this.setState({ isSearch: false, menu: this.state.menuSave })}
                             >
-                                <Text style={[styles.textHeader,{color: colors.dark}]}>Cancel</Text>
+                                <Text style={[styles.textHeader, { color: colors.dark }]}>Cancel</Text>
                             </Button>
                         </Header>
                     )}
-
                 <Content style={styles.content}>
                     {this.state.loading &&
                         <Loading />
                     }
-
                     {this.state.menu.map((listMenu) => (
                         <Card>
                             <CardItem >
@@ -165,7 +165,7 @@ class Home extends Component {
                                         <CardItem>
                                             <Image style={styles.itemImage} source={{ uri: item.Images[0] }} />
                                             <Body>
-                                                <Text style={{color: colors.light}}>
+                                                <Text style={{ color: colors.light }}>
                                                     {this.toEtc(item.Ten, 29)}
                                                 </Text>
                                                 <Text note>{this.toEtc(this.replaceHtml(item.tomtat), 95)}</Text>

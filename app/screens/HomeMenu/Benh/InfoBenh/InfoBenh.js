@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {TouchableHighlight} from 'react-native';
+import { TouchableHighlight } from 'react-native';
+import { LoginButton, ShareDialog } from 'react-native-fbsdk';
 import {
     Container, Header, Left, Body, Right, Content, List, ListItem,
     Text,
@@ -50,14 +51,40 @@ class OpenURLButton extends React.Component {
 class InfoBenh extends Component {
     constructor(props) {
         super(props);
+        const shareLinkContent = {
+            contentType: 'link',
+            contentUrl: 'https://www.facebook.com/',
+        };
         this.state = {
             detail: [],
-        };
+        },
+            { shareLinkContent: shareLinkContent, };
         medicalApi.getDetailBenh(this.props.id).then(res => {
             this.setState({
                 detail: res,
             })
         });
+    }
+    shareLinkWithShareDialog() {
+        var tmp = this;
+        ShareDialog.canShow(this.state.shareLinkContent).then(
+            function (canShow) {
+                if (canShow) {
+                    return ShareDialog.show(tmp.state.shareLinkContent);
+                }
+            }
+        ).then(
+            function (result) {
+                if (result.isCancelled) {
+                    alert('Share cancelled');
+                } else {
+                    alert('Share success with postId: ' + result.postId);
+                }
+            },
+            function (error) {
+                alert('Share fail with error: ' + error);
+            }
+            );
     }
     rederDuLieu(LoaiDuLieu, Dulieu, LinkAnh) {
         let styles = getStyles(colors);
@@ -129,11 +156,31 @@ class InfoBenh extends Component {
                             <Icon name='md-add' />
                             <Text>Theo dõi</Text>
                         </Button>
-                        <Button full
+                        {/* <Button full
                             style={styles.button}>
                             <Icon name='logo-facebook' />
                             <Text>Share Facebook</Text>
-                        </Button>
+                        </Button> */}
+                        <LoginButton full
+                            style={styles.button}
+                            publishPermissions={["publish_actions"]}
+                            onLoginFinished={
+                                (error, result) => {
+                                    if (error) {
+                                        alert("Đăng nhập lỗi: " + error.message);
+                                    } else if (result.isCancelled) {
+                                        alert("Dừng đăng nhập");
+                                    } else {
+                                        alert("Đăng nhập thành công với quyền: " + result.grantedPermissions)
+                                    }
+                                }
+                            }
+                            onLogoutFinished={() => alert("Bạn đã đăng xuất")}>
+                            </LoginButton>
+
+                        <TouchableHighlight onPress={this.shareLinkWithShareDialog.bind(this)}>
+                            <Text style={styles.shareText}>Share</Text>
+                        </TouchableHighlight>
                     </View>
                 </Content>
             </Container>
